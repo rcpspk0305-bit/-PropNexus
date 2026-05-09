@@ -1,0 +1,39 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Node / React
+node_modules/
+dist/
+.eslintcache
+*.local
+
+# C / Compilation
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.exe
+backend/core/libds_engine.dll
+backend/core/libds_engine.so
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data (Optional: ignore if datasets are huge)
+# backend/data/*.csv
