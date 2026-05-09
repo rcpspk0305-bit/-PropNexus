@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AISearchBar from "./components/AISearchBar";
 
 const API_BASE = 'http://localhost:8000/api';
 
 const App = () => {
+  const [allProperties, setAllProperties] = useState([]);
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({
@@ -19,6 +21,7 @@ const App = () => {
     setLoading(true);
     try {
       const res = await axios.post(`${API_BASE}/search`, filters);
+      setAllProperties(res.data.properties);
       setProperties(res.data.properties);
     } catch (err) {
       console.error(err);
@@ -30,6 +33,22 @@ const App = () => {
   useEffect(() => {
     fetchProperties();
   }, []);
+
+  const handleAISearch = (parsedFilters, rawQuery) => {
+    let filtered = allProperties;
+
+    if (parsedFilters.bedrooms)
+      filtered = filtered.filter(p => p.bedrooms >= parsedFilters.bedrooms);
+    if (parsedFilters.maxPrice)
+      filtered = filtered.filter(p => p.price <= parsedFilters.maxPrice);
+    if (parsedFilters.city)
+      filtered = filtered.filter(p => p.location_name?.toLowerCase().includes(parsedFilters.city.toLowerCase()));
+    if (parsedFilters.type)
+      filtered = filtered.filter(p => p.property_type === parsedFilters.type);
+
+    setProperties(filtered);
+    console.log("AI parsed:", parsedFilters);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
@@ -107,6 +126,8 @@ const App = () => {
 
         {/* Results Grid */}
         <section className="flex-1">
+          <AISearchBar onAISearch={handleAISearch} />
+
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-xl font-bold text-gray-800">
               {loading ? 'Searching...' : `${properties.length} Properties Found`}

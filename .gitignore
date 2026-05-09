@@ -37,3 +37,8 @@ backend/core/libds_engine.so
 
 # Data (Optional: ignore if datasets are huge)
 # backend/data/*.csv
+
+# Toolchains and Temporary Files
+backend/scripts/mingw64/
+*.zip
+test.c

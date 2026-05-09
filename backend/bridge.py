@@ -56,12 +56,39 @@ class EngineBridge:
         ext = '.dll' if os.name == 'nt' else '.so'
         lib_name = f"libds_engine{ext}"
         self.lib_path = os.path.join(os.path.dirname(__file__), 'core', lib_name)
-        self.lib = ctypes.CDLL(self.lib_path)
-        self._setup_signatures()
-        self.engine_ptr = self.lib.ds_create_engine(csv_path.encode('utf-8'))
+        try:
+            self.lib = ctypes.CDLL(self.lib_path)
+            self._setup_signatures()
+            self.engine_ptr = self.lib.ds_create_engine(csv_path.encode('utf-8'))
+            self.fallback = None
+            print("SUCCESS: C-Engine loaded successfully (High Performance Mode)")
+        except Exception as e:
+            print(f"WARNING: C-Engine load failed: {e}")
+            print("INFO: Switching to Python Fallback Engine (Compatibility Mode)")
+            from c_fallback import PropertyFallback
+            import csv
+            data = []
+            with open(csv_path, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    data.append({
+                        "property_id": int(row['property_id']),
+                        "title": row['title'],
+                        "location_name": row['location_name'],
+                        "property_type": row['property_type'],
+                        "latitude": float(row['latitude']),
+                        "longitude": float(row['longitude']),
+                        "price": float(row['price_inr']),
+                        "area": int(row['area_sqft']),
+                        "bedrooms": int(row['bedrooms']),
+                        "bathrooms": int(row['bathrooms']),
+                    })
+            self.fallback = PropertyFallback(data)
+            self.lib = None
         self.initialized = True
 
     def _setup_signatures(self):
+        if not self.lib: return
         self.lib.ds_create_engine.argtypes = [ctypes.c_char_p]
         self.lib.ds_create_engine.restype = ctypes.POINTER(PropertyEngine)
         self.lib.ds_get_by_id.argtypes = [ctypes.POINTER(PropertyEngine), ctypes.c_int32]
@@ -79,6 +106,8 @@ class EngineBridge:
         self.lib.ds_destroy_engine.argtypes = [ctypes.POINTER(PropertyEngine)]
 
     def search_advanced(self, min_p, max_p, min_area, beds, baths, sort_price) -> List[Dict]:
+        if self.fallback:
+            return self.fallback.search_advanced(min_p, max_p, min_area, beds, baths, sort_price)
         results_ptr = ctypes.POINTER(ctypes.POINTER(Property))()
         count = ctypes.c_int32(0)
         self.lib.ds_filter_and_sort(self.engine_ptr, min_p, max_p, min_area, beds, baths, sort_price, ctypes.byref(results_ptr), ctypes.byref(count))
@@ -87,6 +116,8 @@ class EngineBridge:
         return output
 
     def get_top_k(self, lat, lon, k) -> List[Dict]:
+        if self.fallback:
+            return self.fallback.get_top_k(lat, lon, k)
         results_ptr = ctypes.POINTER(ctypes.POINTER(Property))()
         count = ctypes.c_int32(0)
         self.lib.ds_get_top_k_nearby(self.engine_ptr, lat, lon, k, ctypes.byref(results_ptr), ctypes.byref(count))
@@ -95,5 +126,7 @@ class EngineBridge:
         return output
 
     def get_by_id(self, prop_id: int) -> Optional[Dict]:
+        if self.fallback:
+            return self.fallback.get_by_id(prop_id)
         p_ptr = self.lib.ds_get_by_id(self.engine_ptr, prop_id)
         return p_ptr.contents.to_dict() if p_ptr else None

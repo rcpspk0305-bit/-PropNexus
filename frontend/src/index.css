@@ -1,0 +1,105 @@
+:root {
+  font-family: 'Plus Jakarta Sans', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+/* AI Search Bar */
+.ai-search-wrapper {
+  position: relative;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.ai-search-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #a8d8ea;
+  font-size: 13px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.ai-badge {
+  background: #00b4d8;
+  color: #fff;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.ai-search-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.ai-search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.ai-search-input::placeholder { color: rgba(255,255,255,0.4); }
+.ai-search-input:focus { border-color: #00b4d8; }
+
+.ai-search-btn {
+  padding: 12px 24px;
+  background: #00b4d8;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.ai-search-btn:hover:not(:disabled) { background: #0096c7; transform: scale(1.02); }
+.ai-search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.ai-spinner { display: inline-block; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.ai-suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0; right: 0;
+  background: #1a2a3a;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 10px 0;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.ai-suggestions-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  padding: 4px 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.ai-suggestion-item {
+  padding: 10px 16px;
+  color: #cce;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ai-suggestion-item:hover { background: rgba(0, 180, 216, 0.15); }

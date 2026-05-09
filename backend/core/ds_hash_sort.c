@@ -105,21 +105,23 @@ PropertyEngine* ds_create_engine(const char* csv_path) {
         engine->data = realloc(engine->data, (engine->count + 1) * sizeof(Property));
         Property* p = &engine->data[engine->count];
         const char* ptr = line;
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 14; i++) {
             ptr = parse_field(ptr, field, sizeof(field));
             switch(i) {
                 case 0: p->property_id = atoi(field); break;
                 case 1: strncpy(p->title, field, MAX_TITLE_LEN-1); break;
-                case 2: strncpy(p->location_name, field, MAX_LOCATION_LEN-1); break;
-                case 3: strncpy(p->property_type, field, MAX_TYPE_LEN-1); break;
-                case 4: p->latitude = atof(field); break;
-                case 5: p->longitude = atof(field); break;
+                case 2: strncpy(p->property_type, field, MAX_TYPE_LEN-1); break;
+                case 3: strncpy(p->location_name, field, MAX_LOCATION_LEN-1); break;
+                // case 4: city (ignored)
+                // case 5: state (ignored)
                 case 6: p->price = atof(field); break;
-                case 7: p->bedrooms = atoi(field); break;
-                case 8: p->area = atoi(field); break;
-                case 9: p->bathrooms = (p->bedrooms > 0) ? (p->bedrooms - 1) : 1; // Defaulting for sample data
-                        strncpy(p->amenities, field, MAX_AMENITIES_LEN-1); break;
-                case 10: strncpy(p->description, field, MAX_DESCRIPTION_LEN-1); break;
+                case 7: p->area = atoi(field); break;
+                case 8: p->bedrooms = atoi(field); break;
+                case 9: p->bathrooms = atoi(field); break;
+                case 10: strncpy(p->amenities, field, MAX_AMENITIES_LEN-1); break; // Using amenities for furnishing
+                case 11: p->latitude = atof(field); break;
+                case 12: p->longitude = atof(field); break;
+                case 13: strncpy(p->description, field, MAX_DESCRIPTION_LEN-1); break; // Using description for listing_type
             }
         }
         hash_insert(engine, p);

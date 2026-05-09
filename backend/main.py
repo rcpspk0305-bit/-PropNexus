@@ -21,7 +21,7 @@ app.add_middleware(
 )
 
 # Initialize Engine (Singleton)
-DATA_PATH = os.path.join(os.path.dirname(__file__), "data", "properties.csv")
+DATA_PATH = os.path.join(os.path.dirname(__file__), "synthetic_properties.csv")
 try:
     engine = EngineBridge(DATA_PATH)
 except Exception as e:
