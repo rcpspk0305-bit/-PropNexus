@@ -1,30 +1,35 @@
-# PropertyScan Pro: Automated Build Script for C Core
+# PropNexus C-Engine Build Script (Optimized for 64-bit)
+$ErrorActionPreference = "Stop"
 
-Write-Host "--- Starting C-Core Build Process ---" -ForegroundColor Cyan
+$CoreDir = Join-Path $PSScriptRoot "..\core"
+$InternalGcc = Join-Path $PSScriptRoot "mingw64\mingw64\bin\gcc.exe"
 
-$CoreDir = "$PSScriptRoot\..\core"
-$LibName = "libds_engine.dll"
-
-# Check for GCC
-if (!(Get-Command gcc -ErrorAction SilentlyContinue)) {
-    Write-Error "GCC not found. Please install MinGW-w64 (64-bit) or another GCC compiler."
-    exit 1
+# Use internal 64-bit GCC if available to avoid Win32/64 bitness mismatch
+if (Test-Path $InternalGcc) {
+    $GccPath = $InternalGcc
+    Write-Host "Using Internal 64-bit GCC: $GccPath" -ForegroundColor Cyan
+} else {
+    $GccPath = "gcc"
+    Write-Host "Using System Default GCC: $GccPath" -ForegroundColor Yellow
 }
+
+$SourceFiles = @("ds_hash_sort.c", "ds_spatial_heap.c")
+$OutputFile = "libds_engine_avl.dll"
+
+Write-Host "Compiling PropNexus AVL Search Engine..." -ForegroundColor Green
 
 Push-Location $CoreDir
-
-Write-Host "Compiling Optimized Shared Library..." -ForegroundColor Yellow
-# -O3: Maximum optimization
-# -march=native: Tune for current CPU
-# -shared: Create DLL
-# -fPIC: Position Independent Code
-gcc -O3 -march=native -Wall -Wextra -std=c11 -fPIC -shared -o $LibName ds_hash_sort.c ds_spatial_heap.c
-
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "Success! $LibName created in core/" -ForegroundColor Green
-} else {
-    Write-Error "Compilation Failed."
+try {
+    # Compile with optimization and shared library flags
+    & $GccPath -O3 -march=native -Wall -Wextra -std=c11 -fPIC -shared -o $OutputFile $SourceFiles
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "Successfully built $OutputFile" -ForegroundColor Green
+    } else {
+        Write-Error "Compilation Failed with exit code $LASTEXITCODE"
+    }
+}
+finally {
+    Pop-Location
 }
 
-Pop-Location
-Write-Host "--- Build Complete ---" -ForegroundColor Cyan
+Write-Host "`n--- Build Complete ---" -ForegroundColor Green

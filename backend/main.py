@@ -54,13 +54,13 @@ class ChatRequest(BaseModel):
 # --- Pydantic V2 Models ---
 class SearchRequest(BaseModel):
     min_price: float = Field(0.0, ge=0)
-    max_price: float = Field(1e12, gt=0)
+    max_price: float = Field(1e12, ge=0)
     min_area: int = Field(0, ge=0)
     bedrooms: int = Field(-1, ge=-1)
     bathrooms: int = Field(-1, ge=-1)
-    sort_by_price: bool = True
+    sort_mode: int = Field(0, ge=0, le=3)
     page: int = Field(1, ge=1)
-    limit: int = Field(20, ge=1, le=100)
+    limit: int = Field(200, ge=1, le=1000)
 
 class PropertyCreate(BaseModel):
     title: str
@@ -100,8 +100,9 @@ async def search_properties(req: SearchRequest):
         raise HTTPException(status_code=503, detail="Search engine is currently unavailable.")
     
     results = engine.search_advanced(
-        req.min_price, req.max_price, req.min_area, req.bedrooms, req.bathrooms, req.sort_by_price
+        req.min_price, req.max_price, req.min_area, req.bedrooms, req.bathrooms, req.sort_mode
     )
+    print(f"DEBUG: C-Engine found {len(results)} properties. Requested Limit: {req.limit}")
     
     # Simple pagination
     start = (req.page - 1) * req.limit
@@ -231,6 +232,7 @@ async def chat_bot(req: ChatRequest):
     Task: Provide a helpful, professional response. If the user asks about property types or locations, 
     mention that PropNexus specializes in Hyderabad real estate (Kukatpally, Gachibowli, Madhapur, etc.).
     """
+    
     
     ai_response = query_hf(prompt)
     

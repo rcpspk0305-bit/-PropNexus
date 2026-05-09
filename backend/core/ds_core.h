@@ -77,7 +77,7 @@ void ds_destroy_engine(PropertyEngine* engine);
 /* ID Indexing & Sorting (ds_hash_sort.c) */
 Property* ds_get_by_id(PropertyEngine* engine, int32_t id);
 void ds_filter_and_sort(PropertyEngine* engine, double min_p, double max_p, 
-                        int32_t min_area, int32_t beds, int32_t baths, bool sort_by_price, 
+                        int32_t min_area, int32_t beds, int32_t baths, int32_t sort_mode, 
                         Property*** results, int32_t* count);
 
 /* Spatial Search & Ranking (ds_spatial_heap.c) */

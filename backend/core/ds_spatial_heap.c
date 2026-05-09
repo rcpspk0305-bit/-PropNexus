@@ -135,15 +135,15 @@ static void avl_filter_recursive(AVLNode* root, double min_p, double max_p, int3
 }
 
 void ds_filter_and_sort_optimized(PropertyEngine* engine, double min_p, double max_p, 
-                         int32_t min_area, int32_t beds, int32_t baths, bool sort_by_price, 
+                         int32_t min_area, int32_t beds, int32_t baths, int32_t sort_mode, 
                          Property*** results, int32_t* count) {
     Property** temp = malloc(engine->count * sizeof(Property*));
     int found = 0;
     avl_filter_recursive(engine->avl_root, min_p, max_p, min_area, beds, baths, temp, &found);
     
-    /* External sort call remains the same */
-    extern void merge_sort(Property** arr, int l, int r, bool by_price);
-    if (found > 1) merge_sort(temp, 0, found - 1, sort_by_price);
+    /* External sort call with sort_mode support */
+    extern void merge_sort(Property** arr, int l, int r, int sort_mode);
+    if (found > 1) merge_sort(temp, 0, found - 1, sort_mode);
     
     *results = temp;
     *count = found;

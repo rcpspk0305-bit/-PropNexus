@@ -16,8 +16,11 @@ pip-delete-this-directory.txt
 # Node / React
 node_modules/
 dist/
+build/
 .eslintcache
 *.local
+.npm
+.cache
 
 # C / Compilation
 *.o
@@ -26,7 +29,10 @@ dist/
 *.dll
 *.dylib
 *.exe
+*.a
+*.lib
 backend/core/libds_engine.dll
+backend/core/libds_engine_avl.dll
 backend/core/libds_engine.so
 
 # IDEs
@@ -35,10 +41,11 @@ backend/core/libds_engine.so
 *.swp
 *.swo
 
-# Data (Optional: ignore if datasets are huge)
-# backend/data/*.csv
-
-# Toolchains and Temporary Files
+# Project Specific
+debug_422.py
 backend/scripts/mingw64/
 *.zip
 test.c
+
+# Data
+# synthetic_properties.csv # Uncomment if you want to ignore the dataset

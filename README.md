@@ -68,3 +68,6 @@ npm run dev
 
 ---
 *Created as a Data Structures Semester Project.*
+
+# From the backend/core directory
+..\scripts\mingw64\mingw64\bin\gcc.exe -O3 -march=native -Wall -Wextra -std=c11 -fPIC -shared -o libds_engine_avl.dll ds_hash_sort.c ds_spatial_heap.c

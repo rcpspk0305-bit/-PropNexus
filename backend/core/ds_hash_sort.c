@@ -29,15 +29,37 @@ Property* ds_get_by_id(PropertyEngine* engine, int32_t id) {
     return NULL;
 }
 
+/* Multi-criteria comparison: BHK -> Location -> Listing Type -> Furnished -> Price -> Bathrooms */
+static int compare_multi(const Property* a, const Property* b) {
+    if (a->bedrooms != b->bedrooms) return a->bedrooms - b->bedrooms;
+    int loc_cmp = strcmp(a->location_name, b->location_name);
+    if (loc_cmp != 0) return loc_cmp;
+    int type_cmp = strcmp(a->description, b->description); // Listing Type
+    if (type_cmp != 0) return type_cmp;
+    int furn_cmp = strcmp(a->amenities, b->amenities);
+    if (furn_cmp != 0) return furn_cmp;
+    if (a->price != b->price) return (a->price < b->price) ? -1 : 1;
+    return a->bathrooms - b->bathrooms;
+}
+
 /* Stable Merge Sort for Properties: O(N log N) */
-static void merge(Property** arr, int l, int m, int r, bool by_price) {
+static void merge(Property** arr, int l, int m, int r, int sort_mode) {
     int n1 = m - l + 1, n2 = r - m;
     Property **L = malloc(n1 * sizeof(Property*)), **R = malloc(n2 * sizeof(Property*));
     for (int i = 0; i < n1; i++) L[i] = arr[l + i];
     for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
     int i = 0, j = 0, k = l;
     while (i < n1 && j < n2) {
-        bool condition = by_price ? (L[i]->price <= R[j]->price) : (L[i]->area >= R[j]->area);
+        bool condition;
+        if (sort_mode == 3) { // Listing Type (Description)
+            condition = (strcmp(L[i]->description, R[j]->description) <= 0);
+        } else if (sort_mode == 2) {
+            condition = (compare_multi(L[i], R[j]) <= 0);
+        } else if (sort_mode == 1) { // Area Desc
+            condition = (L[i]->area >= R[j]->area);
+        } else { // Price Asc
+            condition = (L[i]->price <= R[j]->price);
+        }
         if (condition) arr[k++] = L[i++]; else arr[k++] = R[j++];
     }
     while (i < n1) arr[k++] = L[i++];
@@ -45,12 +67,12 @@ static void merge(Property** arr, int l, int m, int r, bool by_price) {
     free(L); free(R);
 }
 
-void merge_sort(Property** arr, int l, int r, bool by_price) {
+void merge_sort(Property** arr, int l, int r, int sort_mode) {
     if (l < r) {
         int m = l + (r - l) / 2;
-        merge_sort(arr, l, m, by_price);
-        merge_sort(arr, m + 1, r, by_price);
-        merge(arr, l, m, r, by_price);
+        merge_sort(arr, l, m, sort_mode);
+        merge_sort(arr, m + 1, r, sort_mode);
+        merge(arr, l, m, r, sort_mode);
     }
 }
 
@@ -60,9 +82,9 @@ extern void ds_filter_and_sort_optimized(PropertyEngine* engine, double min_p, d
                          Property*** results, int32_t* count);
 
 void ds_filter_and_sort(PropertyEngine* engine, double min_p, double max_p, 
-                        int32_t min_area, int32_t beds, int32_t baths, bool sort_by_price, 
+                        int32_t min_area, int32_t beds, int32_t baths, int32_t sort_mode, 
                         Property*** results, int32_t* count) {
-    ds_filter_and_sort_optimized(engine, min_p, max_p, min_area, beds, baths, sort_by_price, results, count);
+    ds_filter_and_sort_optimized(engine, min_p, max_p, min_area, beds, baths, sort_mode, results, count);
 }
 
 /* Robust CSV Parsing & Engine Initialization */

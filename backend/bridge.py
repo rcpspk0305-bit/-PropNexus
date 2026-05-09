@@ -97,7 +97,7 @@ class EngineBridge:
         self.lib.ds_get_by_id.restype = ctypes.POINTER(Property)
         self.lib.ds_filter_and_sort.argtypes = [
             ctypes.POINTER(PropertyEngine), ctypes.c_double, ctypes.c_double, 
-            ctypes.c_int32, ctypes.c_int32, ctypes.c_int32, ctypes.c_bool,
+            ctypes.c_int32, ctypes.c_int32, ctypes.c_int32, ctypes.c_int32,
             ctypes.POINTER(ctypes.POINTER(ctypes.POINTER(Property))), ctypes.POINTER(ctypes.c_int32)
         ]
         self.lib.ds_get_top_k_nearby.argtypes = [
@@ -107,12 +107,12 @@ class EngineBridge:
         self.lib.ds_free_results.argtypes = [ctypes.POINTER(ctypes.POINTER(Property))]
         self.lib.ds_destroy_engine.argtypes = [ctypes.POINTER(PropertyEngine)]
 
-    def search_advanced(self, min_p, max_p, min_area, beds, baths, sort_price) -> List[Dict]:
+    def search_advanced(self, min_p, max_p, min_area, beds, baths, sort_mode) -> List[Dict]:
         if self.fallback:
-            return self.fallback.search_advanced(min_p, max_p, min_area, beds, baths, sort_price)
+            return self.fallback.search_advanced(min_p, max_p, min_area, beds, baths, sort_mode)
         results_ptr = ctypes.POINTER(ctypes.POINTER(Property))()
         count = ctypes.c_int32(0)
-        self.lib.ds_filter_and_sort(self.engine_ptr, min_p, max_p, min_area, beds, baths, sort_price, ctypes.byref(results_ptr), ctypes.byref(count))
+        self.lib.ds_filter_and_sort(self.engine_ptr, min_p, max_p, min_area, beds, baths, int(sort_mode), ctypes.byref(results_ptr), ctypes.byref(count))
         output = [results_ptr[i].contents.to_dict() for i in range(count.value)]
         self.lib.ds_free_results(results_ptr)
         return output

@@ -64,7 +64,7 @@ export default function AISearchBar({ onAISearch }) {
         <input
           type="text"
           className="ai-search-input"
-          placeholder='e.g. "3BHK near good schools in Austin under $600k"'
+          placeholder='e.g. "3BHK near good schools in Hyderabad under 2Cr"'
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setShowSuggestions(true)}

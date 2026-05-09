@@ -15,15 +15,29 @@ const App = () => {
     bedrooms: -1,
     bathrooms: -1,
     min_area: 0,
-    sort_by_price: true
+    sort_mode: 0, // 0: Price, 1: Area, 2: Multi-criteria
+    limit: 1000
   });
 
   const fetchProperties = async () => {
     setLoading(true);
     try {
-      const res = await axios.post(`${API_BASE}/search`, filters);
-      setAllProperties(res.data.properties);
-      setProperties(res.data.properties);
+      // Ensure all numeric fields are actually numbers before sending
+      const cleanFilters = {
+        ...filters,
+        min_price: Number(filters.min_price) || 0,
+        max_price: Number(filters.max_price) || 1000000000,
+        bedrooms: Number(filters.bedrooms),
+        bathrooms: Number(filters.bathrooms),
+        min_area: Number(filters.min_area) || 0,
+        sort_mode: Number(filters.sort_mode),
+        limit: Number(filters.limit)
+      };
+      const res = await axios.post(`${API_BASE}/search`, cleanFilters);
+      // Handle both paginated object {properties: []} and raw array []
+      const fetchedProps = Array.isArray(res.data) ? res.data : (res.data.properties || []);
+      setProperties(fetchedProps);
+      if (allProperties.length === 0) setAllProperties(fetchedProps);
     } catch (err) {
       console.error(err);
     } finally {
@@ -110,6 +124,19 @@ const App = () => {
                   ))}
                 </div>
               </div>
+              <div>
+                <label className="text-sm font-semibold text-gray-500 uppercase tracking-wider block mb-3">Sort By</label>
+                <select 
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                  value={filters.sort_mode}
+                  onChange={(e) => setFilters({...filters, sort_mode: parseInt(e.target.value)})}
+                >
+                  <option value="0">Price (Lowest First)</option>
+                  <option value="1">Area (Largest First)</option>
+                  <option value="2">Advanced (BHK + Loc + Status)</option>
+                  <option value="3">Market Status (New/Sale/Resale)</option>
+                </select>
+              </div>
 
               <button 
                 onClick={fetchProperties}
@@ -147,8 +174,13 @@ const App = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       alt={p.title}
                     />
-                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-indigo-600 shadow-sm">
-                      {p.property_type}
+                    <div className="absolute top-4 left-4 flex gap-2">
+                      <div className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-indigo-600 shadow-sm">
+                        {p.property_type}
+                      </div>
+                      <div className="bg-indigo-600 px-3 py-1 rounded-full text-xs font-bold text-white shadow-sm">
+                        {p.description}
+                      </div>
                     </div>
                   </div>
                   <div className="p-6">
