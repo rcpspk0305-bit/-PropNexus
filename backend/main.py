@@ -6,8 +6,8 @@ import os
 from bridge import EngineBridge
 
 app = FastAPI(
-    title="PropertyScan Pro: High-Performance Search Engine",
-    description="A hybrid C/Python spatial search platform with AI-driven insights.",
+    title="PropNexus: High-Performance Search Engine",
+    description="A full-stack smart property search system with C-based indexing and AI-driven insights.",
     version="2.0.0"
 )
 

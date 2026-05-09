@@ -39,7 +39,7 @@ const App = () => {
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">P</div>
             <h1 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">
-              PropertyScan Pro
+              PropNexus
             </h1>
           </div>
           <div className="flex gap-4">

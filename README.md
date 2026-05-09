@@ -1,6 +1,6 @@
-# PropertyScan Pro: AI-Powered Spatial Search Engine
+# PropNexus: AI-Powered Spatial Search Engine
 
-A high-performance real-estate property search platform built with a hybrid C/Python architecture. This project showcases advanced Data Structures (K-D Trees, Hash Tables, Heaps) for massive scalability and AI-driven insights for a modern user experience.
+**PropNexus** is a full-stack smart property search system built for efficient real-estate listing retrieval. The core search engine is implemented in C using data structures such as hash tables or tree-based indexing for fast lookup, filtering, sorting, ranking, and spatial querying, while FastAPI powers the backend, React provides the frontend, and AI adds natural-language assistance and result explanations.
 
 ## 🚀 Key Features
 - **Spatial K-D Tree**: Ultra-fast geographic range queries and nearest-neighbor searches in $O(\log N)$ or $O(\sqrt{N})$.
@@ -12,7 +12,7 @@ A high-performance real-estate property search platform built with a hybrid C/Py
 
 ## 📁 Project Structure
 ```text
-propertyscan-pro/
+PropNexus/
 ├── backend/            # Python & C Logic
 │   ├── core/           # C High-Performance Engine
 │   │   ├── ds_core.h       # Structural blueprint & FFI definitions
