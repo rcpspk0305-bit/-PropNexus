@@ -54,7 +54,7 @@ class EngineBridge:
     def __init__(self, csv_path: str):
         if hasattr(self, 'initialized'): return
         ext = '.dll' if os.name == 'nt' else '.so'
-        lib_name = f"libds_engine{ext}"
+        lib_name = f"libds_engine_avl{ext}"
         self.lib_path = os.path.join(os.path.dirname(__file__), 'core', lib_name)
         try:
             self.lib = ctypes.CDLL(self.lib_path)
