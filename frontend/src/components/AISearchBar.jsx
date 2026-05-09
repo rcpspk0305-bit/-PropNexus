@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 const SAMPLE_SUGGESTIONS = [
-  "3BHK near top schools in Austin under $600k",
-  "Apartments with gym in Seattle",
-  "Houses with 2+ baths in Miami under $500k",
+  "3BHK near HITEC City under 2Cr",
+  "Villas in Gachibowli with 3+ baths",
+  "Apartments in Kondapur under 80 Lakhs",
 ];
 
 export default function AISearchBar({ onAISearch }) {
@@ -40,15 +40,15 @@ export default function AISearchBar({ onAISearch }) {
       filters.maxPrice = price;
     }
 
-    // City
-    const cities = ["austin", "miami", "seattle", "new york", "los angeles", "san francisco", "denver", "chicago", "houston", "phoenix"];
-    const cityFound = cities.find((c) => lower.includes(c));
-    if (cityFound) filters.city = cityFound.replace(/\b\w/g, (l) => l.toUpperCase());
+    // City/Location
+    const locations = ["kukatpally", "gachibowli", "madhapur", "kondapur", "hitec city", "manikonda", "jubilee hills", "banjara hills", "tellapur", "narsingi"];
+    const locFound = locations.find((l) => lower.includes(l));
+    if (locFound) filters.city = locFound.replace(/\b\w/g, (l) => l.toUpperCase());
 
     // Property type
-    if (lower.includes("apartment")) filters.type = "Apartment";
-    if (lower.includes("house")) filters.type = "House";
-    if (lower.includes("townhouse")) filters.type = "Townhouse";
+    if (lower.includes("apartment") || lower.includes("flat")) filters.type = "Apartment";
+    if (lower.includes("house") || lower.includes("villa")) filters.type = "House";
+    if (lower.includes("plot")) filters.type = "Plot";
 
     return filters;
   };

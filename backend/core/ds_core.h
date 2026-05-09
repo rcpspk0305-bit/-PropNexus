@@ -38,12 +38,12 @@ typedef struct HashNode {
     struct HashNode* next;
 } HashNode;
 
-/* K-D Tree Node for Spatial Indexing */
-typedef struct KDNode {
+/* AVL Tree Node for Price Indexing */
+typedef struct AVLNode {
     Property* property;
-    struct KDNode *left, *right;
-    int8_t axis; // 0 for Lat, 1 for Lon
-} KDNode;
+    struct AVLNode *left, *right;
+    int32_t height;
+} AVLNode;
 
 /* Min-Heap Node for Top-K Ranking */
 typedef struct {
@@ -63,7 +63,7 @@ typedef struct {
     int32_t count;
     int32_t capacity;
     HashNode* hash_table[HASH_SIZE];
-    KDNode* spatial_root;
+    AVLNode* avl_root;
 } PropertyEngine;
 
 #ifdef __cplusplus
@@ -85,6 +85,7 @@ void ds_spatial_range(PropertyEngine* engine, double lat_min, double lon_min,
                       double lat_max, double lon_max, Property*** results, int32_t* count);
 void ds_get_top_k_nearby(PropertyEngine* engine, double lat, double lon, int32_t k, 
                          Property*** results, int32_t* count);
+AVLNode* ds_avl_insert(AVLNode* node, Property* p);
 
 /* Utility */
 void ds_free_results(Property** results);

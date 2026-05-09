@@ -3,7 +3,7 @@
 **PropNexus** is a full-stack smart property search system built for efficient real-estate listing retrieval. The core search engine is implemented in C using data structures such as hash tables or tree-based indexing for fast lookup, filtering, sorting, ranking, and spatial querying, while FastAPI powers the backend, React provides the frontend, and AI adds natural-language assistance and result explanations.
 
 ## 🚀 Key Features
-- **Spatial K-D Tree**: Ultra-fast geographic range queries and nearest-neighbor searches in $O(\log N)$ or $O(\sqrt{N})$.
+- **AVL Tree Indexing**: Efficient price-based range search in $O(\log N + K)$.
 - **ID Hash Table**: Instant $O(1)$ property lookups by ID.
 - **Merge Sort Engine**: Stable, high-speed ranking and filtering of property results.
 - **Min-Heap Ranking**: Efficient Top-K nearest property retrieval.
@@ -17,7 +17,7 @@ PropNexus/
 │   ├── core/           # C High-Performance Engine
 │   │   ├── ds_core.h       # Structural blueprint & FFI definitions
 │   │   ├── ds_hash_sort.c  # ID Indexing & Merge Sort logic
-│   │   └── ds_spatial_heap.c # K-D Tree & Min-Heap logic
+│   │   └── ds_spatial_heap.c # AVL Tree & Min-Heap logic
 │   ├── data/           # Property datasets (CSV/Binary)
 │   ├── scripts/        # Build and smoke test scripts
 │   ├── main.py         # FastAPI REST Endpoints
@@ -62,7 +62,7 @@ npm run dev
 | Operation | Data Structure | Complexity |
 | :--- | :--- | :--- |
 | **ID Lookup** | Hash Table (Chaining) | $O(1)$ Average |
-| **Spatial Query** | 2D K-D Tree | $O(\sqrt{N} + K)$ |
+| **Price Search** | AVL Tree | $O(\log N + K)$ |
 | **Top-K Ranking** | Binary Min-Heap | $O(N \log K)$ |
 | **Result Sorting** | Merge Sort | $O(N \log N)$ |
 

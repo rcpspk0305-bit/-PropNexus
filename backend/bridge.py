@@ -82,6 +82,8 @@ class EngineBridge:
                         "area": int(row['area_sqft']),
                         "bedrooms": int(row['bedrooms']),
                         "bathrooms": int(row['bathrooms']),
+                        "amenities": row.get('furnishing_status', ''),
+                        "description": row.get('listing_type', ''),
                     })
             self.fallback = PropertyFallback(data)
             self.lib = None
@@ -130,3 +132,31 @@ class EngineBridge:
             return self.fallback.get_by_id(prop_id)
         p_ptr = self.lib.ds_get_by_id(self.engine_ptr, prop_id)
         return p_ptr.contents.to_dict() if p_ptr else None
+
+    def reload(self, csv_path: str):
+        if self.lib and self.engine_ptr:
+            self.lib.ds_destroy_engine(self.engine_ptr)
+            self.engine_ptr = self.lib.ds_create_engine(csv_path.encode('utf-8'))
+        elif self.fallback:
+            # Simple fallback reload logic
+            import csv
+            data = []
+            with open(csv_path, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    data.append({
+                        "property_id": int(row['property_id']),
+                        "title": row['title'],
+                        "location_name": row['location_name'],
+                        "property_type": row['property_type'],
+                        "latitude": float(row['latitude']),
+                        "longitude": float(row['longitude']),
+                        "price": float(row['price_inr']),
+                        "area": int(row['area_sqft']),
+                        "bedrooms": int(row['bedrooms']),
+                        "bathrooms": int(row['bathrooms']),
+                        "amenities": row.get('furnishing_status', ''),
+                        "description": row.get('listing_type', ''),
+                    })
+            from c_fallback import PropertyFallback
+            self.fallback = PropertyFallback(data)

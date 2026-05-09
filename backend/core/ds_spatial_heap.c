@@ -2,50 +2,92 @@
 #include <stdlib.h>
 #include <math.h>
 
-/* K-D Tree Construction: O(N log N) */
-static int compare_lat(const void* a, const void* b) {
-    double d = (*(Property**)a)->latitude - (*(Property**)b)->latitude;
-    return (d > 0) - (d < 0);
-}
-static int compare_lon(const void* a, const void* b) {
-    double d = (*(Property**)a)->longitude - (*(Property**)b)->longitude;
-    return (d > 0) - (d < 0);
+/* --- AVL Tree Implementation (Indexing by Price) --- */
+
+static int32_t get_height(AVLNode* n) {
+    return n ? n->height : 0;
 }
 
-KDNode* build_kd_tree(Property** props, int32_t n, int8_t depth) {
-    if (n <= 0) return NULL;
-    int8_t axis = depth % 2;
-    qsort(props, n, sizeof(Property*), axis == 0 ? compare_lat : compare_lon);
-    int32_t mid = n / 2;
-    KDNode* node = malloc(sizeof(KDNode));
-    node->property = props[mid];
-    node->axis = axis;
-    node->left = build_kd_tree(props, mid, depth + 1);
-    node->right = build_kd_tree(props + mid + 1, n - mid - 1, depth + 1);
+static int32_t max(int32_t a, int32_t b) {
+    return (a > b) ? a : b;
+}
+
+static AVLNode* create_node(Property* p) {
+    AVLNode* node = (AVLNode*)malloc(sizeof(AVLNode));
+    node->property = p;
+    node->left = node->right = NULL;
+    node->height = 1;
     return node;
 }
 
-/* Spatial Range Search: O(sqrt(N) + K) */
-static void range_search_recursive(KDNode* root, double lat_min, double lon_min, double lat_max, double lon_max, Property*** results, int32_t* count) {
-    if (!root) return;
-    Property* p = root->property;
-    if (p->latitude >= lat_min && p->latitude <= lat_max && p->longitude >= lon_min && p->longitude <= lon_max) {
-        *results = realloc(*results, (*count + 1) * sizeof(Property*));
-        (*results)[(*count)++] = p;
-    }
-    double val = (root->axis == 0) ? p->latitude : p->longitude;
-    double min_v = (root->axis == 0) ? lat_min : lon_min;
-    double max_v = (root->axis == 0) ? lat_max : lon_max;
-    if (min_v <= val) range_search_recursive(root->left, lat_min, lon_min, lat_max, lon_max, results, count);
-    if (max_v >= val) range_search_recursive(root->right, lat_min, lon_min, lat_max, lon_max, results, count);
+static AVLNode* right_rotate(AVLNode* y) {
+    AVLNode* x = y->left;
+    AVLNode* T2 = x->right;
+    x->right = y;
+    y->left = T2;
+    y->height = max(get_height(y->left), get_height(y->right)) + 1;
+    x->height = max(get_height(x->left), get_height(x->right)) + 1;
+    return x;
 }
+
+static AVLNode* left_rotate(AVLNode* x) {
+    AVLNode* y = x->right;
+    AVLNode* T2 = y->left;
+    y->left = x;
+    x->right = T2;
+    x->height = max(get_height(x->left), get_height(x->right)) + 1;
+    y->height = max(get_height(y->left), get_height(y->right)) + 1;
+    return y;
+}
+
+static int32_t get_balance(AVLNode* n) {
+    return n ? get_height(n->left) - get_height(n->right) : 0;
+}
+
+AVLNode* ds_avl_insert(AVLNode* node, Property* p) {
+    if (!node) return create_node(p);
+
+    if (p->price < node->property->price)
+        node->left = ds_avl_insert(node->left, p);
+    else
+        node->right = ds_avl_insert(node->right, p);
+
+    node->height = 1 + max(get_height(node->left), get_height(node->right));
+    int32_t balance = get_balance(node);
+
+    // Left Left
+    if (balance > 1 && p->price < node->left->property->price)
+        return right_rotate(node);
+    // Right Right
+    if (balance < -1 && p->price > node->right->property->price)
+        return left_rotate(node);
+    // Left Right
+    if (balance > 1 && p->price > node->left->property->price) {
+        node->left = left_rotate(node->left);
+        return right_rotate(node);
+    }
+    // Right Left
+    if (balance < -1 && p->price < node->right->property->price) {
+        node->right = right_rotate(node->right);
+        return left_rotate(node);
+    }
+    return node;
+}
+
+/* --- Spatial & Heap Logic --- */
 
 void ds_spatial_range(PropertyEngine* engine, double lat_min, double lon_min, double lat_max, double lon_max, Property*** results, int32_t* count) {
+    /* Since K-D Tree is replaced by Price-AVL, we fallback to O(N) scan for spatial ranges */
     *results = NULL; *count = 0;
-    range_search_recursive(engine->spatial_root, lat_min, lon_min, lat_max, lon_max, results, count);
+    for (int i = 0; i < engine->count; i++) {
+        Property* p = &engine->data[i];
+        if (p->latitude >= lat_min && p->latitude <= lat_max && p->longitude >= lon_min && p->longitude <= lon_max) {
+            *results = realloc(*results, (*count + 1) * sizeof(Property*));
+            (*results)[(*count)++] = p;
+        }
+    }
 }
 
-/* Min-Heap Operations for Top-K: O(log K) */
 static void heap_push(MinHeap* h, Property* p, double d2) {
     int i = h->size++;
     while (i > 0 && h->nodes[(i-1)/2].distance_sq > d2) { h->nodes[i] = h->nodes[(i-1)/2]; i = (i-1)/2; }
@@ -76,11 +118,42 @@ void ds_get_top_k_nearby(PropertyEngine* engine, double lat, double lon, int32_t
     *count = res_k; free(h.nodes);
 }
 
-/* Lifecycle & Cleanup */
-static void free_kd(KDNode* n) { if (n) { free_kd(n->left); free_kd(n->right); free(n); } }
+static void avl_filter_recursive(AVLNode* root, double min_p, double max_p, int32_t min_area, int32_t beds, int32_t baths, Property** results, int32_t* count) {
+    if (!root) return;
+    if (root->property->price > min_p)
+        avl_filter_recursive(root->left, min_p, max_p, min_area, beds, baths, results, count);
+    
+    if (root->property->price >= min_p && root->property->price <= max_p) {
+        Property* p = root->property;
+        if (p->area >= min_area && (beds == -1 || p->bedrooms == beds) && (baths == -1 || p->bathrooms == baths)) {
+            results[(*count)++] = p;
+        }
+    }
+    
+    if (root->property->price < max_p)
+        avl_filter_recursive(root->right, min_p, max_p, min_area, beds, baths, results, count);
+}
+
+void ds_filter_and_sort_optimized(PropertyEngine* engine, double min_p, double max_p, 
+                         int32_t min_area, int32_t beds, int32_t baths, bool sort_by_price, 
+                         Property*** results, int32_t* count) {
+    Property** temp = malloc(engine->count * sizeof(Property*));
+    int found = 0;
+    avl_filter_recursive(engine->avl_root, min_p, max_p, min_area, beds, baths, temp, &found);
+    
+    /* External sort call remains the same */
+    extern void merge_sort(Property** arr, int l, int r, bool by_price);
+    if (found > 1) merge_sort(temp, 0, found - 1, sort_by_price);
+    
+    *results = temp;
+    *count = found;
+}
+
+/* Lifecycle */
+static void free_avl(AVLNode* n) { if (n) { free_avl(n->left); free_avl(n->right); free(n); } }
 void ds_destroy_engine(PropertyEngine* engine) {
     if (!engine) return;
-    free_kd(engine->spatial_root);
+    free_avl(engine->avl_root);
     for (int i=0; i<HASH_SIZE; i++) {
         HashNode* curr = engine->hash_table[i];
         while (curr) { HashNode* tmp = curr; curr = curr->next; free(tmp); }

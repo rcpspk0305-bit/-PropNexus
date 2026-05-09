@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AISearchBar from "./components/AISearchBar";
+import Chatbot from "./components/Chatbot";
 
 const API_BASE = 'http://localhost:8000/api';
 
@@ -10,7 +11,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({
     min_price: 0,
-    max_price: 2000000,
+    max_price: 100000000, // 10 Cr default max for Hyderabad
     bedrooms: -1,
     bathrooms: -1,
     min_area: 0,
@@ -30,25 +31,21 @@ const App = () => {
     }
   };
 
+  const handleAISearch = (parsedFilters) => {
+    setFilters(prev => {
+      const updated = {
+        ...prev,
+        bedrooms: parsedFilters.bedrooms !== undefined ? parsedFilters.bedrooms : prev.bedrooms,
+        max_price: parsedFilters.maxPrice !== undefined ? parsedFilters.maxPrice : prev.max_price,
+      };
+      return updated;
+    });
+    // Trigger fetch in next effect cycle
+  };
+
   useEffect(() => {
     fetchProperties();
-  }, []);
-
-  const handleAISearch = (parsedFilters, rawQuery) => {
-    let filtered = allProperties;
-
-    if (parsedFilters.bedrooms)
-      filtered = filtered.filter(p => p.bedrooms >= parsedFilters.bedrooms);
-    if (parsedFilters.maxPrice)
-      filtered = filtered.filter(p => p.price <= parsedFilters.maxPrice);
-    if (parsedFilters.city)
-      filtered = filtered.filter(p => p.location_name?.toLowerCase().includes(parsedFilters.city.toLowerCase()));
-    if (parsedFilters.type)
-      filtered = filtered.filter(p => p.property_type === parsedFilters.type);
-
-    setProperties(filtered);
-    console.log("AI parsed:", parsedFilters);
-  };
+  }, [filters]);
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
@@ -157,7 +154,7 @@ const App = () => {
                   <div className="p-6">
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="font-bold text-lg leading-tight group-hover:text-indigo-600 transition-colors">{p.title}</h3>
-                      <span className="text-xl font-black text-indigo-600">${p.price.toLocaleString()}</span>
+                      <span className="text-xl font-black text-indigo-600">₹{p.price.toLocaleString('en-IN')}</span>
                     </div>
                     <p className="text-gray-500 text-sm mb-4 flex items-center gap-1">
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -184,6 +181,7 @@ const App = () => {
           )}
         </section>
       </main>
+      <Chatbot />
     </div>
   );
 };
