@@ -30,7 +30,11 @@ const Chatbot = () => {
 
     try {
       const res = await axios.post(`${API_BASE}/chat`, { message: input });
-      const botMsg = { role: 'assistant', content: res.data.reply };
+      const botMsg = { 
+        role: 'assistant', 
+        content: res.data.reply,
+        recommendations: res.data.recommendations || []
+      };
       setMessages(prev => [...prev, botMsg]);
     } catch (err) {
       console.error(err);
@@ -57,24 +61,74 @@ const Chatbot = () => {
       {/* Chat Window */}
       {isOpen && (
         <div className="absolute bottom-20 right-0 w-96 h-[500px] bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 duration-300">
-          <div className="bg-indigo-600 p-4 text-white flex items-center gap-3">
-            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center font-bold">AI</div>
-            <div>
-              <h3 className="font-bold">PropNexus Assistant</h3>
-              <p className="text-xs text-indigo-100">Always active</p>
+          <div className="bg-indigo-600 p-4 text-white flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center font-bold">AI</div>
+              <div>
+                <h3 className="font-bold text-sm">PropNexus Assistant</h3>
+                <p className="text-[10px] text-indigo-100">AI-Powered Recommendations</p>
+              </div>
             </div>
+            <button 
+              onClick={() => setMessages([{ role: 'assistant', content: 'Hi! I am PropNexus AI. How can I help you find a property today?' }])}
+              className="p-1.5 hover:bg-white/10 rounded-lg transition-colors"
+              title="Clear Chat"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 scrollbar-thin">
+            {messages.length === 1 && (
+              <div className="grid grid-cols-1 gap-2 mb-4">
+                {['3 BHK under 1.5 Cr', 'Villas in Gachibowli', 'Apartments in Kukatpally'].map(s => (
+                  <button 
+                    key={s}
+                    onClick={() => { setInput(s); setTimeout(handleSend, 100); }}
+                    className="text-left p-2.5 bg-white border border-gray-100 rounded-xl text-xs text-gray-600 hover:border-indigo-500 hover:text-indigo-600 transition-all shadow-sm"
+                  >
+                    "{s}"
+                  </button>
+                ))}
+              </div>
+            )}
             {messages.map((msg, i) => (
-              <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${
+              <div key={i} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} space-y-2`}>
+                <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${
                   msg.role === 'user' 
                     ? 'bg-indigo-600 text-white rounded-tr-none' 
                     : 'bg-white text-gray-800 shadow-sm border border-gray-100 rounded-tl-none'
                 }`}>
                   {msg.content}
                 </div>
+                
+                {/* Recommendations UI */}
+                {msg.recommendations && msg.recommendations.length > 0 && (
+                  <div className="w-full overflow-x-auto pb-2 -mx-2 px-2 flex gap-3 scrollbar-hide">
+                    {msg.recommendations.map((p) => (
+                      <div key={p.property_id} className="min-w-[200px] max-w-[200px] bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden flex-shrink-0 group">
+                        <div className="h-24 bg-gray-100 relative">
+                           <img 
+                            src={`https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&q=80`} 
+                            className="w-full h-full object-cover"
+                            alt={p.title}
+                          />
+                          <div className="absolute top-2 right-2 bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">
+                            ₹{p.price > 10000000 ? (p.price/10000000).toFixed(1) + ' Cr' : (p.price/100000).toFixed(1) + ' L'}
+                          </div>
+                        </div>
+                        <div className="p-3">
+                          <h4 className="font-bold text-xs truncate mb-1">{p.title}</h4>
+                          <p className="text-[10px] text-gray-500 truncate mb-2">{p.location_name}</p>
+                          <div className="flex justify-between items-center">
+                            <span className="text-[10px] font-semibold text-gray-700">{p.bedrooms} BHK • {p.area} sqft</span>
+                            <button className="text-[10px] font-bold text-indigo-600 hover:underline">View</button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
             {loading && (

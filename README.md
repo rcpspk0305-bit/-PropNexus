@@ -7,8 +7,11 @@
 - **ID Hash Table**: Instant $O(1)$ property lookups by ID.
 - **Merge Sort Engine**: Stable, high-speed ranking and filtering of property results.
 - **Min-Heap Ranking**: Efficient Top-K nearest property retrieval.
-- **AI-Powered Insights**: Natural language search and property comparison (Gemini-integrated).
-- **Premium Frontend**: Modern, responsive dashboard built with React and TailwindCSS.
+- **Hybrid Gen-AI Engine**: 
+  - **NLP Search**: Describe properties in plain English (e.g., "3BHK in Gachibowli under 2Cr").
+  - **Expert Chatbot**: Personalized property recommendations based on your query context.
+  - **Local RAG Fallback**: Robust knowledge retrieval system that ensures the assistant stays smart even if external APIs are down.
+- **Premium Frontend**: Modern, high-performance dashboard built with React and custom-tuned CSS for a seamless user experience.
 
 ## 📁 Project Structure
 ```text
@@ -32,7 +35,7 @@ PropNexus/
 
 ### 1. Requirements
 - **Compiler**: GCC (MinGW-w64 recommended for 64-bit Windows)
-- **Runtime**: Python 3.9+, Node.js 18+
+- **Runtime**: Python 3.14+, Node.js 18+
 - **Environment**: 64-bit OS matching your Python/Compiler bitness
 
 ### 2. Build the C Engine
@@ -65,6 +68,13 @@ npm run dev
 | **Price Search** | AVL Tree | $O(\log N + K)$ |
 | **Top-K Ranking** | Binary Min-Heap | $O(N \log K)$ |
 | **Result Sorting** | Merge Sort | $O(N \log N)$ |
+| **AI Matching** | Hybrid (NLP + RAG) | $O(\text{Embedding/Keyword Search})$ |
+
+## 🌟 Recent Updates (v2.1)
+- **Advanced Chat Recommendations**: The assistant now suggests specific property cards within the chat interface.
+- **RAG Knowledge Base**: Implemented a local retrieval-augmented generation fallback to answer general questions without relying on external LLM APIs.
+- **NLP Query Parser**: Ported search logic to the backend for unified query understanding across the search bar and chatbot.
+- **UI Polish**: Integrated custom scrollbars, micro-animations, and a unified color palette for a premium aesthetic.
 
 ---
 *Created as a Data Structures Semester Project.*

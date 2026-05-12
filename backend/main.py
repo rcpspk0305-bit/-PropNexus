@@ -220,29 +220,74 @@ async def ai_insights(req: AIExplainRequest):
         "selected_count": len(selected_props)
     }
 
+from ai_utils import parse_natural_query, get_recommendation_prompt, get_rag_fallback_response
+
 @app.post("/api/chat")
 async def chat_bot(req: ChatRequest):
     """
-    General AI Chatbot: Answers questions about real estate and PropNexus.
+    Enhanced AI Chatbot: Answers questions and recommends properties.
     """
-    prompt = f"""
-    Context: You are PropNexus Assistant, a specialized real estate AI. 
-    User Question: {req.message}
+    if not engine:
+        return {"reply": "I'm having trouble accessing our property database right now. How else can I assist you?"}
+
+    # 1. Parse query for parameters
+    params = parse_natural_query(req.message)
     
-    Task: Provide a helpful, professional response. If the user asks about property types or locations, 
-    mention that PropNexus specializes in Hyderabad real estate (Kukatpally, Gachibowli, Madhapur, etc.).
-    """
+    # 2. If it looks like a search query, fetch data from engine
+    recommended_properties = []
+    is_recommendation = False
     
+    if params:
+        is_recommendation = True
+        # Fetch properties based on parsed filters
+        # Default values for missing filters to avoid empty results
+        min_p = 0
+        max_p = params.get('max_price', 1000000000)
+        min_a = 0
+        beds = params.get('bedrooms', -1)
+        baths = params.get('bathrooms', -1)
+        
+        # Perform search
+        results = engine.search_advanced(min_p, max_p, min_a, beds, baths, 2) # Mode 2 for advanced sort
+        
+        # Filter by location if specified (C-engine might handle this internally but let's be sure)
+        if 'location' in params:
+            loc = params['location'].lower()
+            results = [p for p in results if loc in p['location_name'].lower()]
+        
+        recommended_properties = results[:5]
+
+    # 3. Construct Prompt
+    if is_recommendation:
+        prompt = get_recommendation_prompt(req.message, recommended_properties)
+    else:
+        prompt = f"""
+        Context: You are PropNexus Assistant, a specialized real estate AI. 
+        User Question: {req.message}
+        
+        Task: Provide a helpful, professional response. If the user asks about property types or locations, 
+        mention that PropNexus specializes in Hyderabad real estate (Kukatpally, Gachibowli, Madhapur, etc.).
+        If they seem to be looking for a house, ask for their budget or preferred location.
+        """
     
+    # 4. Get AI Response
     ai_response = query_hf(prompt)
     
     if ai_response and isinstance(ai_response, list) and len(ai_response) > 0:
-        reply = ai_response[0].get("generated_text", "").strip()
+        reply = ai_response[0].get("generated_text", "").replace(prompt, "").strip()
     else:
-        # Intelligent fallback
-        reply = "I'm currently in lightweight mode. PropNexus is a high-performance search engine for Hyderabad real estate, using C-based indexing for ultra-fast results. How can I help you find your dream home?"
+        # Intelligent fallback for recommendation
+        if is_recommendation and recommended_properties:
+            prop_names = ", ".join([p['title'] for p in recommended_properties[:3]])
+            reply = f"I've found some great options for you in {params.get('location', 'Hyderabad')}, including {prop_names}. Based on your criteria, these properties offer excellent value. Would you like to see more details for any of these?"
+        else:
+            # RAG Fallback integration
+            reply = get_rag_fallback_response(req.message)
     
-    return {"reply": reply}
+    return {
+        "reply": reply,
+        "recommendations": recommended_properties
+    }
 
 if __name__ == "__main__":
     import uvicorn

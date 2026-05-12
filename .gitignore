@@ -46,6 +46,7 @@ debug_422.py
 backend/scripts/mingw64/
 *.zip
 test.c
+.gemini/
 
 # Data
 # synthetic_properties.csv # Uncomment if you want to ignore the dataset
