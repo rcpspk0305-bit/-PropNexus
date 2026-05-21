@@ -78,44 +78,130 @@ AVLNode* ds_avl_insert(AVLNode* node, Property* p) {
 
 void ds_spatial_range(PropertyEngine* engine, double lat_min, double lon_min, double lat_max, double lon_max, Property*** results, int32_t* count) {
     /* Since K-D Tree is replaced by Price-AVL, we fallback to O(N) scan for spatial ranges */
-    *results = NULL; *count = 0;
+    int32_t capacity = 16;
+    Property** temp = malloc(capacity * sizeof(Property*));
+    if (!temp) {
+        *results = NULL;
+        *count = 0;
+        return;
+    }
+    int32_t found = 0;
     for (int i = 0; i < engine->count; i++) {
         Property* p = &engine->data[i];
         if (p->latitude >= lat_min && p->latitude <= lat_max && p->longitude >= lon_min && p->longitude <= lon_max) {
-            *results = realloc(*results, (*count + 1) * sizeof(Property*));
-            (*results)[(*count)++] = p;
+            if (found >= capacity) {
+                capacity *= 2;
+                Property** new_temp = realloc(temp, capacity * sizeof(Property*));
+                if (!new_temp) {
+                    free(temp);
+                    *results = NULL;
+                    *count = 0;
+                    return;
+                }
+                temp = new_temp;
+            }
+            temp[found++] = p;
         }
     }
-}
-
-static void heap_push(MinHeap* h, Property* p, double d2) {
-    int i = h->size++;
-    while (i > 0 && h->nodes[(i-1)/2].distance_sq > d2) { h->nodes[i] = h->nodes[(i-1)/2]; i = (i-1)/2; }
-    h->nodes[i].property = p; h->nodes[i].distance_sq = d2;
-}
-
-static HeapNode heap_pop(MinHeap* h) {
-    HeapNode root = h->nodes[0], last = h->nodes[--h->size];
-    int i = 0;
-    while (i*2+1 < h->size) {
-        int child = i*2+1;
-        if (child+1 < h->size && h->nodes[child+1].distance_sq < h->nodes[child].distance_sq) child++;
-        if (last.distance_sq <= h->nodes[child].distance_sq) break;
-        h->nodes[i] = h->nodes[child]; i = child;
+    if (found > 0) {
+        Property** sh_temp = realloc(temp, found * sizeof(Property*));
+        if (sh_temp) {
+            temp = sh_temp;
+        }
+        *results = temp;
+    } else {
+        free(temp);
+        *results = NULL;
     }
-    h->nodes[i] = last; return root;
+    *count = found;
+}
+
+static void max_heap_push(MinHeap* h, Property* p, double d2) {
+    // If heap is not full, push element and bubble up
+    if (h->size < h->capacity) {
+        int i = h->size++;
+        while (i > 0 && h->nodes[(i-1)/2].distance_sq < d2) {
+            h->nodes[i] = h->nodes[(i-1)/2];
+            i = (i-1)/2;
+        }
+        h->nodes[i].property = p;
+        h->nodes[i].distance_sq = d2;
+    } 
+    // If heap is full, compare with the farthest element (root)
+    else if (d2 < h->nodes[0].distance_sq) {
+        // Replace root and bubble down
+        h->nodes[0].property = p;
+        h->nodes[0].distance_sq = d2;
+        
+        int i = 0;
+        double root_d2 = d2;
+        HeapNode temp = h->nodes[0];
+        
+        while (i * 2 + 1 < h->size) {
+            int child = i * 2 + 1;
+            if (child + 1 < h->size && h->nodes[child+1].distance_sq > h->nodes[child].distance_sq) {
+                child++;
+            }
+            if (root_d2 >= h->nodes[child].distance_sq) {
+                break;
+            }
+            h->nodes[i] = h->nodes[child];
+            i = child;
+        }
+        h->nodes[i] = temp;
+    }
+}
+
+static HeapNode max_heap_pop(MinHeap* h) {
+    HeapNode root = h->nodes[0];
+    HeapNode last = h->nodes[--h->size];
+    int i = 0;
+    while (i * 2 + 1 < h->size) {
+        int child = i * 2 + 1;
+        if (child + 1 < h->size && h->nodes[child+1].distance_sq > h->nodes[child].distance_sq) {
+            child++;
+        }
+        if (last.distance_sq >= h->nodes[child].distance_sq) {
+            break;
+        }
+        h->nodes[i] = h->nodes[child];
+        i = child;
+    }
+    if (h->size > 0) {
+        h->nodes[i] = last;
+    }
+    return root;
 }
 
 void ds_get_top_k_nearby(PropertyEngine* engine, double lat, double lon, int32_t k, Property*** results, int32_t* count) {
-    MinHeap h = { malloc(engine->count * sizeof(HeapNode)), 0, engine->count };
-    for (int i = 0; i < engine->count; i++) {
-        double d2 = pow(engine->data[i].latitude - lat, 2) + pow(engine->data[i].longitude - lon, 2);
-        heap_push(&h, &engine->data[i], d2);
+    if (k <= 0 || engine->count <= 0) {
+        *results = NULL;
+        *count = 0;
+        return;
     }
     int res_k = (k < engine->count) ? k : engine->count;
+    MinHeap h = { malloc(res_k * sizeof(HeapNode)), 0, res_k };
+    if (!h.nodes) {
+        *results = NULL;
+        *count = 0;
+        return;
+    }
+    for (int i = 0; i < engine->count; i++) {
+        double d2 = pow(engine->data[i].latitude - lat, 2) + pow(engine->data[i].longitude - lon, 2);
+        max_heap_push(&h, &engine->data[i], d2);
+    }
     *results = malloc(res_k * sizeof(Property*));
-    for (int i = 0; i < res_k; i++) (*results)[i] = heap_pop(&h).property;
-    *count = res_k; free(h.nodes);
+    if (!*results) {
+        free(h.nodes);
+        *count = 0;
+        return;
+    }
+    // Fill the results backwards so the closest properties are at the front
+    for (int i = res_k - 1; i >= 0; i--) {
+        (*results)[i] = max_heap_pop(&h).property;
+    }
+    *count = res_k;
+    free(h.nodes);
 }
 
 static void avl_filter_recursive(AVLNode* root, double min_p, double max_p, int32_t min_area, int32_t beds, int32_t baths, Property** results, int32_t* count) {
@@ -138,6 +224,11 @@ void ds_filter_and_sort_optimized(PropertyEngine* engine, double min_p, double m
                          int32_t min_area, int32_t beds, int32_t baths, int32_t sort_mode, 
                          Property*** results, int32_t* count) {
     Property** temp = malloc(engine->count * sizeof(Property*));
+    if (!temp) {
+        *results = NULL;
+        *count = 0;
+        return;
+    }
     int found = 0;
     avl_filter_recursive(engine->avl_root, min_p, max_p, min_area, beds, baths, temp, &found);
     
@@ -145,7 +236,16 @@ void ds_filter_and_sort_optimized(PropertyEngine* engine, double min_p, double m
     extern void merge_sort(Property** arr, int l, int r, int sort_mode);
     if (found > 1) merge_sort(temp, 0, found - 1, sort_mode);
     
-    *results = temp;
+    if (found > 0) {
+        Property** sh_temp = realloc(temp, found * sizeof(Property*));
+        if (sh_temp) {
+            temp = sh_temp;
+        }
+        *results = temp;
+    } else {
+        free(temp);
+        *results = NULL;
+    }
     *count = found;
 }
 

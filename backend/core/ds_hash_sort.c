@@ -43,37 +43,42 @@ static int compare_multi(const Property* a, const Property* b) {
 }
 
 /* Stable Merge Sort for Properties: O(N log N) */
-static void merge(Property** arr, int l, int m, int r, int sort_mode) {
-    int n1 = m - l + 1, n2 = r - m;
-    Property **L = malloc(n1 * sizeof(Property*)), **R = malloc(n2 * sizeof(Property*));
-    for (int i = 0; i < n1; i++) L[i] = arr[l + i];
-    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
-    int i = 0, j = 0, k = l;
-    while (i < n1 && j < n2) {
+static void merge(Property** arr, Property** temp, int l, int m, int r, int sort_mode) {
+    int i = l, j = m + 1, k = l;
+    while (i <= m && j <= r) {
         bool condition;
         if (sort_mode == 3) { // Listing Type (Description)
-            condition = (strcmp(L[i]->description, R[j]->description) <= 0);
+            condition = (strcmp(arr[i]->description, arr[j]->description) <= 0);
         } else if (sort_mode == 2) {
-            condition = (compare_multi(L[i], R[j]) <= 0);
+            condition = (compare_multi(arr[i], arr[j]) <= 0);
         } else if (sort_mode == 1) { // Area Desc
-            condition = (L[i]->area >= R[j]->area);
+            condition = (arr[i]->area >= arr[j]->area);
         } else { // Price Asc
-            condition = (L[i]->price <= R[j]->price);
+            condition = (arr[i]->price <= arr[j]->price);
         }
-        if (condition) arr[k++] = L[i++]; else arr[k++] = R[j++];
+        if (condition) temp[k++] = arr[i++]; else temp[k++] = arr[j++];
     }
-    while (i < n1) arr[k++] = L[i++];
-    while (j < n2) arr[k++] = R[j++];
-    free(L); free(R);
+    while (i <= m) temp[k++] = arr[i++];
+    while (j <= r) temp[k++] = arr[j++];
+    for (i = l; i <= r; i++) arr[i] = temp[i];
+}
+
+static void merge_sort_recursive(Property** arr, Property** temp, int l, int r, int sort_mode) {
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        merge_sort_recursive(arr, temp, l, m, sort_mode);
+        merge_sort_recursive(arr, temp, m + 1, r, sort_mode);
+        merge(arr, temp, l, m, r, sort_mode);
+    }
 }
 
 void merge_sort(Property** arr, int l, int r, int sort_mode) {
-    if (l < r) {
-        int m = l + (r - l) / 2;
-        merge_sort(arr, l, m, sort_mode);
-        merge_sort(arr, m + 1, r, sort_mode);
-        merge(arr, l, m, r, sort_mode);
-    }
+    int n = r - l + 1;
+    if (n <= 1) return;
+    Property** temp = malloc(n * sizeof(Property*));
+    if (!temp) return; // Graceful fallback or dynamic allocation error handling
+    merge_sort_recursive(arr, temp, l, r, sort_mode);
+    free(temp);
 }
 
 /* Filter and Sort: Now delegates to optimized AVL-based search in ds_spatial_heap.c */
@@ -115,12 +120,31 @@ PropertyEngine* ds_create_engine(const char* csv_path) {
     FILE* f = fopen(csv_path, "r");
     if (!f) return NULL;
     PropertyEngine* engine = calloc(1, sizeof(PropertyEngine));
+    if (!engine) { fclose(f); return NULL; }
+
     char line[4096], field[MAX_DESCRIPTION_LEN];
     fgets(line, sizeof(line), f); // Header
     
+    engine->capacity = 128;
+    engine->data = malloc(engine->capacity * sizeof(Property));
+    if (!engine->data) {
+        fclose(f);
+        free(engine);
+        return NULL;
+    }
+    
     while (fgets(line, sizeof(line), f)) {
         line[strcspn(line, "\r\n")] = 0;
-        engine->data = realloc(engine->data, (engine->count + 1) * sizeof(Property));
+        if (engine->count >= engine->capacity) {
+            engine->capacity *= 2;
+            Property* new_data = realloc(engine->data, engine->capacity * sizeof(Property));
+            if (!new_data) {
+                fclose(f);
+                ds_destroy_engine(engine);
+                return NULL;
+            }
+            engine->data = new_data;
+        }
         Property* p = &engine->data[engine->count];
         const char* ptr = line;
         for (int i = 0; i < 14; i++) {
@@ -143,6 +167,15 @@ PropertyEngine* ds_create_engine(const char* csv_path) {
         engine->count++;
     }
     fclose(f);
+
+    // Shrink properties array to exact count to release unused capacity
+    if (engine->count > 0 && engine->count < engine->capacity) {
+        Property* sh_data = realloc(engine->data, engine->count * sizeof(Property));
+        if (sh_data) {
+            engine->data = sh_data;
+            engine->capacity = engine->count;
+        }
+    }
 
     if (engine->count > 0) {
         for (int i = 0; i < engine->count; i++) {
