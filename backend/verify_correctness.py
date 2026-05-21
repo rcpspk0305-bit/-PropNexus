@@ -7,7 +7,25 @@ sys.path.append(os.path.dirname(__file__))
 
 from bridge import EngineBridge
 
+class TeeLogger:
+    def __init__(self, filename):
+        self.terminal = sys.stdout
+        self.log = open(filename, "w", encoding="utf-8")
+        
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+        self.log.flush()
+        
+    def flush(self):
+        self.terminal.flush()
+        self.log.flush()
+
 def run_tests():
+    log_path = os.path.join(os.path.dirname(__file__), "verification_results.txt")
+    sys.stdout = TeeLogger(log_path)
+    sys.stderr = sys.stdout
+    
     data_path = os.path.join(os.path.dirname(__file__), "synthetic_properties.csv")
     print(f"[{time.strftime('%H:%M:%S')}] Loading engine with {data_path}...")
     
