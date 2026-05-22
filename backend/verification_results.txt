@@ -1,0 +1,22 @@
+[08:11:38] Loading engine with C:\Users\rc821\OneDrive\Desktop\DS Project\backend\synthetic_properties.csv...
+SUCCESS: C-Engine loaded successfully (High Performance Mode)
+[08:11:38] Engine loaded successfully in 0.003082 seconds!
+Fallback active: False
+
+--- Testing O(1) ID Lookup ---
+Found Property ID 1: 4 BHK Apartment in Kondapur in Kondapur
+
+--- Testing Advanced Filtering & Sorting ---
+Search completed in 0.001193 seconds. Found 200 properties.
+Verifying price sorting order (Ascending):
+  SUCCESS: All 200 properties are perfectly sorted by price!
+
+--- Testing Top-K Nearest (Spatial Max-Heap) ---
+Top-5 spatial search completed in 0.000114 seconds. Found 5 properties.
+  1. ID: 16 | Dist_Sq: 0.00000137 | Title: 1 BHK Apartment in Kondapur in Kondapur
+  2. ID: 2 | Dist_Sq: 0.00000565 | Title: 1 BHK House in HITEC City in HITEC City
+  3. ID: 146 | Dist_Sq: 0.00000888 | Title: Plot in HITEC City in HITEC City
+  4. ID: 164 | Dist_Sq: 0.00001114 | Title: 3 BHK Apartment in Kondapur in Kondapur
+  5. ID: 188 | Dist_Sq: 0.00001771 | Title: 2 BHK Apartment in HITEC City in HITEC City
+
+--- Verification Complete! ---
