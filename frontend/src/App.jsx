@@ -16,7 +16,9 @@ const App = () => {
     bathrooms: -1,
     min_area: 0,
     sort_mode: 0, // 0: Price, 1: Area, 2: Multi-criteria
-    limit: 1000
+    limit: 1000,
+    location: '',
+    property_type: ''
   });
 
   const fetchProperties = async () => {
@@ -35,7 +37,20 @@ const App = () => {
       };
       const res = await axios.post(`${API_BASE}/search`, cleanFilters);
       // Handle both paginated object {properties: []} and raw array []
-      const fetchedProps = Array.isArray(res.data) ? res.data : (res.data.properties || []);
+      let fetchedProps = Array.isArray(res.data) ? res.data : (res.data.properties || []);
+      
+      // Client-side filtering for Location
+      if (filters.location) {
+        const loc = filters.location.toLowerCase();
+        fetchedProps = fetchedProps.filter(p => p.location_name.toLowerCase().includes(loc));
+      }
+
+      // Client-side filtering for Property Type
+      if (filters.property_type) {
+        const type = filters.property_type.toLowerCase();
+        fetchedProps = fetchedProps.filter(p => p.property_type.toLowerCase().includes(type));
+      }
+
       setProperties(fetchedProps);
       if (allProperties.length === 0) setAllProperties(fetchedProps);
     } catch (err) {
@@ -50,11 +65,13 @@ const App = () => {
       const updated = {
         ...prev,
         bedrooms: parsedFilters.bedrooms !== undefined ? parsedFilters.bedrooms : prev.bedrooms,
+        bathrooms: parsedFilters.bathrooms !== undefined ? parsedFilters.bathrooms : prev.bathrooms,
         max_price: parsedFilters.maxPrice !== undefined ? parsedFilters.maxPrice : prev.max_price,
+        location: parsedFilters.city !== undefined ? parsedFilters.city : prev.location,
+        property_type: parsedFilters.type !== undefined ? parsedFilters.type : prev.property_type,
       };
       return updated;
     });
-    // Trigger fetch in next effect cycle
   };
 
   useEffect(() => {
@@ -151,6 +168,90 @@ const App = () => {
         {/* Results Grid */}
         <section className="flex-1">
           <AISearchBar onAISearch={handleAISearch} />
+
+          {/* Active Search Badges */}
+          {(filters.bedrooms !== -1 || filters.bathrooms !== -1 || filters.max_price !== 100000000 || filters.location || filters.property_type) && (
+            <div className="flex flex-wrap gap-2 items-center mb-6 p-4 bg-indigo-50 border border-indigo-100 rounded-xl">
+              <span className="text-xs font-bold text-indigo-700 uppercase tracking-wider mr-2">Active AI Filters:</span>
+              
+              {filters.location && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-indigo-100 text-xs font-semibold text-indigo-700 rounded-full shadow-sm">
+                  📍 {filters.location}
+                  <button 
+                    onClick={() => setFilters(prev => ({ ...prev, location: '' }))}
+                    className="hover:text-red-500 font-bold transition-colors ml-1"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+
+              {filters.property_type && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-indigo-100 text-xs font-semibold text-indigo-700 rounded-full shadow-sm">
+                  🏠 {filters.property_type}
+                  <button 
+                    onClick={() => setFilters(prev => ({ ...prev, property_type: '' }))}
+                    className="hover:text-red-500 font-bold transition-colors ml-1"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+
+              {filters.bedrooms !== -1 && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-indigo-100 text-xs font-semibold text-indigo-700 rounded-full shadow-sm">
+                  🛏️ {filters.bedrooms} BHK
+                  <button 
+                    onClick={() => setFilters(prev => ({ ...prev, bedrooms: -1 }))}
+                    className="hover:text-red-500 font-bold transition-colors ml-1"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+
+              {filters.bathrooms !== -1 && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-indigo-100 text-xs font-semibold text-indigo-700 rounded-full shadow-sm">
+                  🛁 {filters.bathrooms} Baths
+                  <button 
+                    onClick={() => setFilters(prev => ({ ...prev, bathrooms: -1 }))}
+                    className="hover:text-red-500 font-bold transition-colors ml-1"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+
+              {filters.max_price !== 100000000 && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-indigo-100 text-xs font-semibold text-indigo-700 rounded-full shadow-sm">
+                  💰 Under ₹{(filters.max_price / 10000000).toFixed(1)} Cr
+                  <button 
+                    onClick={() => setFilters(prev => ({ ...prev, max_price: 100000000 }))}
+                    className="hover:text-red-500 font-bold transition-colors ml-1"
+                  >
+                    ×
+                  </button>
+                </span>
+              )}
+
+              <button 
+                onClick={() => setFilters({
+                  min_price: 0,
+                  max_price: 100000000,
+                  bedrooms: -1,
+                  bathrooms: -1,
+                  min_area: 0,
+                  sort_mode: 0,
+                  limit: 1000,
+                  location: '',
+                  property_type: ''
+                })}
+                className="text-xs font-bold text-red-500 hover:text-red-700 ml-auto hover:underline transition-all"
+              >
+                Clear All
+              </button>
+            </div>
+          )}
 
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-xl font-bold text-gray-800">

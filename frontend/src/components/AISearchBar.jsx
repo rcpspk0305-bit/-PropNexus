@@ -28,22 +28,42 @@ export default function AISearchBar({ onAISearch }) {
     const filters = {};
     const lower = text.toLowerCase();
 
-    // Bedrooms
+    // Bedrooms (e.g. "3BHK", "3 BHK", "3 bed")
     const bedMatch = lower.match(/(\d)\s*b(hk|ed|r)/);
     if (bedMatch) filters.bedrooms = parseInt(bedMatch[1]);
 
-    // Max price
-    const priceMatch = lower.match(/under\s*\$?([\d,]+)k?/);
+    // Bathrooms (e.g. "3 baths", "2 bathroom")
+    const bathMatch = lower.match(/(\d)\s*bath/);
+    if (bathMatch) filters.bathrooms = parseInt(bathMatch[1]);
+
+    // Max price (e.g. "under 2Cr", "below 80 Lakhs", "under 1.5 Cr", "within 50k", "budget of 1.2 Crore")
+    const priceMatch = lower.match(/(?:under|below|within|budget of)\s*(?:₹|rs\.?|)?\s*([\d.]+)\s*(cr|crore|lakh|l|k)?/);
     if (priceMatch) {
-      let price = parseInt(priceMatch[1].replace(",", ""));
-      if (lower.includes("k") && price < 10000) price *= 1000;
-      filters.maxPrice = price;
+      let val = parseFloat(priceMatch[1]);
+      const unit = priceMatch[2];
+      if (unit === 'cr' || unit === 'crore') {
+        val *= 10000000;
+      } else if (unit === 'lakh' || unit === 'l') {
+        val *= 100000;
+      } else if (unit === 'k') {
+        val *= 1000;
+      } else if (val < 100) {
+        // If they write "under 2" without unit, assume they mean Crores
+        val *= 10000000;
+      }
+      filters.maxPrice = val;
     }
 
     // City/Location
-    const locations = ["kukatpally", "gachibowli", "madhapur", "kondapur", "hitec city", "manikonda", "jubilee hills", "banjara hills", "tellapur", "narsingi"];
+    const locations = [
+      "kukatpally", "gachibowli", "madhapur", "kondapur", 
+      "hitec city", "manikonda", "jubilee hills", "banjara hills", 
+      "tellapur", "narsingi", "miyapur", "uppal", "lb nagar"
+    ];
     const locFound = locations.find((l) => lower.includes(l));
-    if (locFound) filters.city = locFound.replace(/\b\w/g, (l) => l.toUpperCase());
+    if (locFound) {
+      filters.city = locFound.replace(/\b\w/g, (l) => l.toUpperCase());
+    }
 
     // Property type
     if (lower.includes("apartment") || lower.includes("flat")) filters.type = "Apartment";

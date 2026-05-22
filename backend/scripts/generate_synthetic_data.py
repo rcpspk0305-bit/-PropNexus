@@ -2,7 +2,7 @@ import csv
 import random
 
 # Configuration
-NUM_ROWS = 200
+NUM_ROWS = 300
 OUTPUT_FILE = 'synthetic_properties.csv'
 
 # Locality data with coordinates (approximate centers)

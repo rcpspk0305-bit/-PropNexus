@@ -1,201 +1,301 @@
 property_id,title,property_type,location_name,city,state,price_inr,area_sqft,bedrooms,bathrooms,furnishing_status,latitude,longitude,listing_type
-1,4 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,21754000,2825,4,3,Semi-Furnished,17.451513,78.34519,Resale
-2,1 BHK House in HITEC City,House,HITEC City,Hyderabad,Telangana,17734000,889,1,1,Unfurnished,17.44671,78.375867,New Launch
-3,Plot in Kukatpally,Plot,Kukatpally,Hyderabad,Telangana,18088000,2070,0,0,NA,17.47526,78.406981,Sale
-4,2 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,4609000,1148,2,1,Semi-Furnished,17.216992,78.5227,Sale
-5,1 BHK House in Tukkuguda,House,Tukkuguda,Hyderabad,Telangana,6086000,771,1,1,Furnished,17.210109,78.473163,Sale
-6,2 BHK Villa in Financial District,Villa,Financial District,Hyderabad,Telangana,16218000,961,2,1,Unfurnished,17.413704,78.335252,Resale
-7,Plot in Shadnagar,Plot,Shadnagar,Hyderabad,Telangana,13783000,3409,0,0,NA,17.081265,78.202594,Resale
-8,Plot in Gachibowli,Plot,Gachibowli,Hyderabad,Telangana,54913000,4520,0,0,NA,17.446169,78.362059,New Launch
-9,2 BHK House in Nallagandla,House,Nallagandla,Hyderabad,Telangana,14221000,1383,2,2,Semi-Furnished,17.456521,78.305059,Resale
-10,3 BHK Villa in Madhapur,Villa,Madhapur,Hyderabad,Telangana,47771000,2073,3,3,Unfurnished,17.443509,78.402237,New Launch
-11,2 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,6112000,1086,2,1,Semi-Furnished,17.616445,78.491999,Resale
-12,2 BHK House in Banjara Hills,House,Banjara Hills,Hyderabad,Telangana,31225000,1374,2,1,Furnished,17.429372,78.437015,Sale
-13,2 BHK Apartment in Tukkuguda,Apartment,Tukkuguda,Hyderabad,Telangana,7025000,1382,2,1,Unfurnished,17.18785,78.496645,Resale
-14,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,16580000,1792,3,3,Furnished,17.475971,78.309657,Resale
-15,1 BHK House in Banjara Hills,House,Banjara Hills,Hyderabad,Telangana,14662000,757,1,1,Semi-Furnished,17.419455,78.424995,New Launch
-16,1 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,3247000,539,1,1,Unfurnished,17.449063,78.373214,Sale
-17,2 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,19250000,1279,2,2,Unfurnished,17.439482,78.336105,Resale
-18,1 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,3563000,605,1,1,Furnished,17.622277,78.491035,Sale
-19,2 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,12443000,1044,2,2,Unfurnished,17.41891,78.338872,New Launch
-20,Plot in Financial District,Plot,Financial District,Hyderabad,Telangana,85166000,4998,0,0,NA,17.421265,78.335242,Resale
-21,4 BHK House in Banjara Hills,House,Banjara Hills,Hyderabad,Telangana,53906000,3684,4,3,Unfurnished,17.428557,78.434177,Sale
-22,4 BHK Apartment in Patancheru,Apartment,Patancheru,Hyderabad,Telangana,8822000,2253,4,3,Semi-Furnished,17.519521,78.27147,New Launch
-23,2 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,9710000,1177,2,1,Semi-Furnished,17.38437,78.350513,New Launch
-24,2 BHK House in Nallagandla,House,Nallagandla,Hyderabad,Telangana,11170000,1211,2,2,Semi-Furnished,17.465468,78.31095,Sale
-25,2 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,14934000,1386,2,2,Semi-Furnished,17.436524,78.36067,New Launch
-26,3 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,8007000,1645,3,3,Furnished,17.260061,78.425369,New Launch
-27,1 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,6104000,637,1,1,Furnished,17.459417,78.355371,New Launch
-28,3 BHK Villa in Tellapur,Villa,Tellapur,Hyderabad,Telangana,20346000,1633,3,2,Unfurnished,17.452975,78.289795,Resale
-29,2 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,17086000,1330,2,2,Semi-Furnished,17.388458,78.348819,Resale
-30,3 BHK House in Maheshwaram,House,Maheshwaram,Hyderabad,Telangana,10427000,1891,3,2,Unfurnished,17.121928,78.431957,Sale
-31,3 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,12500000,1494,3,3,Furnished,17.476494,78.415068,New Launch
-32,3 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,39543000,2198,3,2,Furnished,17.426877,78.349805,Resale
-33,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,7250000,901,2,2,Furnished,17.464255,78.288808,Resale
-34,Plot in Tellapur,Plot,Tellapur,Hyderabad,Telangana,23740000,3620,0,0,NA,17.441846,78.3025,Sale
-35,1 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,5073000,545,1,1,Unfurnished,17.455497,78.315551,Resale
-36,3 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,16836000,2139,3,2,Semi-Furnished,17.394318,78.35785,Resale
-37,1 BHK House in Patancheru,House,Patancheru,Hyderabad,Telangana,4134000,867,1,1,Semi-Furnished,17.516892,78.280333,New Launch
-38,2 BHK House in Narsingi,House,Narsingi,Hyderabad,Telangana,16587000,1345,2,1,Furnished,17.396567,78.352966,Sale
-39,Plot in Manikonda,Plot,Manikonda,Hyderabad,Telangana,21928000,3054,0,0,NA,17.387884,78.382126,Resale
-40,2 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,12848000,1194,2,1,Furnished,17.468993,78.311083,Sale
-41,3 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,16141000,2149,3,3,Unfurnished,17.395326,78.375908,Resale
-42,3 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,15090000,2120,3,2,Unfurnished,17.454493,78.297596,Resale
-43,4 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,8594000,2321,4,4,Furnished,17.079437,78.212508,Resale
-44,3 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,34743000,1925,3,3,Semi-Furnished,17.431942,78.336385,Resale
-45,3 BHK Villa in Maheshwaram,Villa,Maheshwaram,Hyderabad,Telangana,15908000,2147,3,3,Semi-Furnished,17.134661,78.433227,Resale
-46,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,8592000,999,2,1,Semi-Furnished,17.453307,78.289548,New Launch
-47,Plot in Madhapur,Plot,Madhapur,Hyderabad,Telangana,64097000,3766,0,0,NA,17.441768,78.379228,Sale
-48,3 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,10242000,1456,3,3,Furnished,17.383726,78.347598,Resale
-49,2 BHK House in Shadnagar,House,Shadnagar,Hyderabad,Telangana,9295000,1346,2,2,Unfurnished,17.060329,78.219266,New Launch
-50,3 BHK House in Financial District,House,Financial District,Hyderabad,Telangana,32527000,1758,3,3,Unfurnished,17.418468,78.337037,Resale
-51,3 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,15480000,1452,3,2,Furnished,17.399663,78.398402,Sale
-52,1 BHK Villa in Narsingi,Villa,Narsingi,Hyderabad,Telangana,5196000,505,1,1,Semi-Furnished,17.388249,78.354632,Sale
-53,Plot in Nallagandla,Plot,Nallagandla,Hyderabad,Telangana,11431000,1307,0,0,NA,17.483563,78.305251,New Launch
-54,1 BHK Villa in Kukatpally,Villa,Kukatpally,Hyderabad,Telangana,9209000,719,1,1,Semi-Furnished,17.482325,78.412592,Resale
-55,Plot in Miyapur,Plot,Miyapur,Hyderabad,Telangana,9407000,1465,0,0,NA,17.507875,78.3523,New Launch
-56,3 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,27963000,1987,3,2,Unfurnished,17.43874,78.353886,Resale
-57,3 BHK House in Kukatpally,House,Kukatpally,Hyderabad,Telangana,13905000,1529,3,3,Unfurnished,17.498386,78.402965,New Launch
-58,1 BHK House in Narsingi,House,Narsingi,Hyderabad,Telangana,6417000,703,1,1,Semi-Furnished,17.376478,78.345592,Sale
-59,2 BHK Villa in Kokapet,Villa,Kokapet,Hyderabad,Telangana,19143000,1086,2,2,Semi-Furnished,17.382343,78.329484,New Launch
-60,3 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,22700000,2189,3,3,Unfurnished,17.439802,78.404289,New Launch
-61,2 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,5994000,936,2,2,Unfurnished,17.460449,78.370714,New Launch
-62,4 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,43495000,4198,4,5,Unfurnished,17.408752,78.342982,Sale
-63,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,15629000,2127,3,3,Unfurnished,17.480712,78.328868,Resale
-64,4 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,20285000,3119,4,3,Semi-Furnished,17.479944,78.34614,New Launch
-65,2 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,13254000,1346,2,1,Semi-Furnished,17.390053,78.346535,Resale
-66,2 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,5093000,934,2,1,Unfurnished,17.243104,78.426243,New Launch
-67,3 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,9768000,1618,3,2,Unfurnished,17.466376,78.35047,Resale
-68,3 BHK House in Kukatpally,House,Kukatpally,Hyderabad,Telangana,19005000,1945,3,3,Semi-Furnished,17.492348,78.393878,Sale
-69,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,10107000,1093,2,2,Semi-Furnished,17.456354,78.289972,Resale
-70,2 BHK Apartment in Tukkuguda,Apartment,Tukkuguda,Hyderabad,Telangana,5393000,1103,2,1,Unfurnished,17.194008,78.47659,Sale
-71,3 BHK Apartment in Tukkuguda,Apartment,Tukkuguda,Hyderabad,Telangana,10575000,1797,3,2,Unfurnished,17.198905,78.481891,New Launch
-72,3 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,18809000,1628,3,3,Semi-Furnished,17.415302,78.358107,Resale
-73,2 BHK House in HITEC City,House,HITEC City,Hyderabad,Telangana,23272000,1119,2,1,Semi-Furnished,17.435011,78.384514,Sale
-74,2 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,20291000,1214,2,1,Semi-Furnished,17.43944,78.39309,Resale
-75,3 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,19438000,1854,3,2,Furnished,17.489534,78.371879,Sale
-76,2 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,4160000,918,2,1,Unfurnished,17.214891,78.549364,Resale
-77,3 BHK Apartment in Patancheru,Apartment,Patancheru,Hyderabad,Telangana,10816000,1644,3,2,Furnished,17.527441,78.270234,Resale
-78,2 BHK Villa in Maheshwaram,Villa,Maheshwaram,Hyderabad,Telangana,9277000,1339,2,1,Unfurnished,17.148149,78.448686,Resale
-79,2 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,18805000,1319,2,2,Unfurnished,17.418924,78.420051,New Launch
-80,3 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,8379000,1877,3,2,Furnished,17.244865,78.42093,New Launch
-81,3 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,30398000,1632,3,3,Furnished,17.381051,78.34125,Resale
-82,2 BHK Apartment in Patancheru,Apartment,Patancheru,Hyderabad,Telangana,6270000,1221,2,2,Unfurnished,17.527416,78.269019,Resale
-83,3 BHK House in Nallagandla,House,Nallagandla,Hyderabad,Telangana,15479000,1784,3,2,Unfurnished,17.461864,78.307244,Sale
-84,1 BHK Apartment in Maheshwaram,Apartment,Maheshwaram,Hyderabad,Telangana,2819000,551,1,1,Furnished,17.133691,78.439267,New Launch
-85,3 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,18785000,2101,3,2,Furnished,17.390387,78.396372,Sale
-86,2 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,10513000,908,2,1,Semi-Furnished,17.391798,78.326866,New Launch
-87,2 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,11763000,1255,2,2,Unfurnished,17.473746,78.365691,Resale
-88,2 BHK House in Manikonda,House,Manikonda,Hyderabad,Telangana,8270000,1089,2,1,Furnished,17.385514,78.387426,New Launch
-89,1 BHK Apartment in Madhapur,Apartment,Madhapur,Hyderabad,Telangana,10350000,612,1,1,Furnished,17.438094,78.382654,Sale
-90,3 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,6155000,1815,3,2,Furnished,17.625161,78.474598,Resale
-91,3 BHK House in Gachibowli,House,Gachibowli,Hyderabad,Telangana,35198000,1975,3,2,Unfurnished,17.454292,78.360723,Sale
-92,2 BHK Villa in Financial District,Villa,Financial District,Hyderabad,Telangana,24467000,1391,2,2,Furnished,17.412892,78.342046,Sale
-93,2 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,11808000,1241,2,2,Furnished,17.474072,78.306405,New Launch
-94,3 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,13131000,2165,3,3,Unfurnished,17.080304,78.211359,New Launch
-95,2 BHK Apartment in HITEC City,Apartment,HITEC City,Hyderabad,Telangana,23417000,1191,2,1,Furnished,17.440704,78.373412,Resale
-96,1 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,5858000,634,1,1,Unfurnished,17.495299,78.40335,New Launch
-97,2 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,3976000,958,2,2,Unfurnished,17.260748,78.440914,New Launch
-98,2 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,12621000,1259,2,2,Furnished,17.496484,78.402951,Sale
-99,1 BHK Villa in Miyapur,Villa,Miyapur,Hyderabad,Telangana,7552000,608,1,1,Semi-Furnished,17.492261,78.352167,Sale
-100,2 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,6913000,1234,2,2,Unfurnished,17.057955,78.201142,Resale
-101,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,10174000,1041,2,1,Furnished,17.460986,78.293188,Sale
-102,2 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,8458000,1176,2,2,Furnished,17.483632,78.413266,Resale
-103,4 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,30568000,3229,4,3,Semi-Furnished,17.478818,78.35194,New Launch
-104,3 BHK Villa in Shadnagar,Villa,Shadnagar,Hyderabad,Telangana,16520000,2019,3,3,Furnished,17.068031,78.22263,Sale
-105,3 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,7969000,2198,3,2,Semi-Furnished,17.620075,78.467456,Sale
-106,4 BHK Apartment in Madhapur,Apartment,Madhapur,Hyderabad,Telangana,27465000,2479,4,5,Unfurnished,17.451596,78.392267,Sale
-107,2 BHK House in Narsingi,House,Narsingi,Hyderabad,Telangana,11841000,963,2,1,Furnished,17.39611,78.358846,New Launch
-108,2 BHK Villa in Narsingi,Villa,Narsingi,Hyderabad,Telangana,13936000,1269,2,1,Unfurnished,17.368437,78.343495,Resale
-109,Plot in Banjara Hills,Plot,Banjara Hills,Hyderabad,Telangana,53323000,4976,0,0,NA,17.403609,78.428503,Resale
-110,3 BHK Villa in Narsingi,Villa,Narsingi,Hyderabad,Telangana,22261000,1893,3,2,Furnished,17.383026,78.33961,Resale
-111,2 BHK Apartment in Shamirpet,Apartment,Shamirpet,Hyderabad,Telangana,6439000,1176,2,2,Semi-Furnished,17.607674,78.560943,Resale
-112,2 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,18886000,1140,2,2,Furnished,17.421946,78.414005,Sale
-113,1 BHK House in Shamshabad,House,Shamshabad,Hyderabad,Telangana,3940000,702,1,1,Semi-Furnished,17.251288,78.428646,Resale
-114,3 BHK Apartment in Shamirpet,Apartment,Shamirpet,Hyderabad,Telangana,7537000,1676,3,3,Unfurnished,17.592306,78.5699,Sale
-115,3 BHK House in Madhapur,House,Madhapur,Hyderabad,Telangana,24933000,1410,3,2,Semi-Furnished,17.440575,78.406469,Sale
-116,3 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,27443000,1507,3,3,Furnished,17.41521,78.340539,Sale
-117,1 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,6040000,556,1,1,Unfurnished,17.421479,78.350806,New Launch
-118,Plot in Patancheru,Plot,Patancheru,Hyderabad,Telangana,12223000,3822,0,0,NA,17.529217,78.256548,Sale
-119,4 BHK House in Manikonda,House,Manikonda,Hyderabad,Telangana,27898000,3346,4,5,Furnished,17.403503,78.370733,Sale
-120,3 BHK Apartment in Madhapur,Apartment,Madhapur,Hyderabad,Telangana,18412000,1823,3,3,Unfurnished,17.436115,78.393226,Sale
-121,3 BHK Villa in HITEC City,Villa,HITEC City,Hyderabad,Telangana,35277000,1486,3,2,Unfurnished,17.446052,78.378414,Sale
-122,2 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,9956000,1298,2,1,Unfurnished,17.504496,78.364497,New Launch
-123,Plot in Manikonda,Plot,Manikonda,Hyderabad,Telangana,19718000,3042,0,0,NA,17.39124,78.383133,Resale
-124,Plot in Shadnagar,Plot,Shadnagar,Hyderabad,Telangana,21709000,4154,0,0,NA,17.072377,78.195207,Sale
-125,3 BHK House in Gachibowli,House,Gachibowli,Hyderabad,Telangana,34975000,1721,3,3,Semi-Furnished,17.432318,78.334758,New Launch
-126,4 BHK House in Nallagandla,House,Nallagandla,Hyderabad,Telangana,28274000,2618,4,5,Semi-Furnished,17.472949,78.31513,New Launch
-127,2 BHK House in Jubilee Hills,House,Jubilee Hills,Hyderabad,Telangana,21142000,982,2,2,Furnished,17.425578,78.400106,Sale
-128,3 BHK House in Narsingi,House,Narsingi,Hyderabad,Telangana,13857000,1605,3,3,Furnished,17.379618,78.348278,Sale
-129,3 BHK House in Nallagandla,House,Nallagandla,Hyderabad,Telangana,14589000,1419,3,2,Unfurnished,17.461619,78.311495,Resale
-130,Plot in Maheshwaram,Plot,Maheshwaram,Hyderabad,Telangana,13670000,2903,0,0,NA,17.126169,78.421488,Sale
-131,Plot in Madhapur,Plot,Madhapur,Hyderabad,Telangana,40907000,2478,0,0,NA,17.434165,78.39014,New Launch
-132,2 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,5251000,1286,2,1,Unfurnished,17.059646,78.220211,Sale
-133,4 BHK House in Manikonda,House,Manikonda,Hyderabad,Telangana,33051000,3908,4,5,Semi-Furnished,17.409759,78.392914,New Launch
-134,2 BHK House in Madhapur,House,Madhapur,Hyderabad,Telangana,19117000,1085,2,2,Furnished,17.450623,78.394049,Resale
-135,2 BHK Villa in Narsingi,Villa,Narsingi,Hyderabad,Telangana,13942000,1383,2,2,Semi-Furnished,17.383198,78.361757,Sale
-136,Plot in Kokapet,Plot,Kokapet,Hyderabad,Telangana,27958000,1952,0,0,NA,17.40818,78.339766,Sale
-137,4 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,21494000,3353,4,3,Semi-Furnished,17.475452,78.421425,Resale
-138,2 BHK Villa in Shamirpet,Villa,Shamirpet,Hyderabad,Telangana,10383000,1368,2,1,Furnished,17.608882,78.563111,New Launch
-139,2 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,8723000,1306,2,1,Furnished,17.22797,78.549522,Resale
-140,2 BHK House in Gachibowli,House,Gachibowli,Hyderabad,Telangana,14549000,1011,2,1,Semi-Furnished,17.452902,78.343936,Sale
-141,2 BHK House in Maheshwaram,House,Maheshwaram,Hyderabad,Telangana,9469000,1234,2,1,Semi-Furnished,17.130557,78.435681,New Launch
-142,3 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,13897000,1563,3,2,Semi-Furnished,17.48743,78.366373,New Launch
-143,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,10665000,1759,3,3,Unfurnished,17.483745,78.305651,Sale
-144,3 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,14615000,1586,3,3,Semi-Furnished,17.505016,78.361077,New Launch
-145,3 BHK Apartment in Maheshwaram,Apartment,Maheshwaram,Hyderabad,Telangana,8176000,2070,3,3,Unfurnished,17.133188,78.42618,New Launch
-146,Plot in HITEC City,Plot,HITEC City,Hyderabad,Telangana,32700000,2747,0,0,NA,17.448825,78.371166,Sale
-147,3 BHK House in Miyapur,House,Miyapur,Hyderabad,Telangana,22249000,2127,3,3,Unfurnished,17.498758,78.369934,Sale
-148,2 BHK Apartment in Madhapur,Apartment,Madhapur,Hyderabad,Telangana,11253000,1018,2,1,Unfurnished,17.434189,78.398556,Resale
-149,3 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,34488000,1996,3,2,Semi-Furnished,17.397159,78.346303,Resale
-150,2 BHK House in HITEC City,House,HITEC City,Hyderabad,Telangana,27424000,1375,2,2,Unfurnished,17.439461,78.38995,Resale
-151,Plot in Nallagandla,Plot,Nallagandla,Hyderabad,Telangana,14150000,2161,0,0,NA,17.470725,78.320665,New Launch
-152,3 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,14935000,1841,3,2,Furnished,17.488864,78.368069,Sale
-153,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,10898000,1435,3,3,Furnished,17.482808,78.32585,Sale
-154,Plot in Shadnagar,Plot,Shadnagar,Hyderabad,Telangana,13034000,3752,0,0,NA,17.078663,78.204478,Resale
-155,3 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,19552000,1947,3,3,Semi-Furnished,17.385476,78.352725,Resale
-156,3 BHK Apartment in Shamirpet,Apartment,Shamirpet,Hyderabad,Telangana,10228000,2107,3,2,Furnished,17.590487,78.569602,New Launch
-157,3 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,30095000,1709,3,3,Unfurnished,17.402856,78.335409,Resale
-158,2 BHK Villa in Narsingi,Villa,Narsingi,Hyderabad,Telangana,18159000,1329,2,1,Semi-Furnished,17.371145,78.354381,Resale
-159,3 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,19526000,2091,3,3,Unfurnished,17.475471,78.419963,Resale
-160,Plot in Nallagandla,Plot,Nallagandla,Hyderabad,Telangana,38475000,4178,0,0,NA,17.461389,78.332256,Resale
-161,3 BHK House in Patancheru,House,Patancheru,Hyderabad,Telangana,11176000,1501,3,2,Furnished,17.529197,78.266733,New Launch
-162,4 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,24965000,2309,4,3,Furnished,17.46174,78.357178,Resale
-163,3 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,11045000,1825,3,3,Unfurnished,17.614412,78.494215,New Launch
-164,3 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,9912000,1406,3,2,Semi-Furnished,17.449691,78.371066,Resale
-165,2 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,8389000,941,2,1,Unfurnished,17.499551,78.407696,Sale
-166,3 BHK House in Financial District,House,Financial District,Hyderabad,Telangana,25812000,1549,3,2,Semi-Furnished,17.421855,78.359685,Resale
-167,3 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,17806000,1474,3,3,Semi-Furnished,17.420088,78.331658,Sale
-168,3 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,13283000,2029,3,3,Semi-Furnished,17.489115,78.348583,Sale
-169,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,17218000,2004,3,3,Unfurnished,17.468309,78.31648,New Launch
-170,3 BHK House in Manikonda,House,Manikonda,Hyderabad,Telangana,11347000,1418,3,2,Semi-Furnished,17.402446,78.378305,New Launch
-171,4 BHK Apartment in HITEC City,Apartment,HITEC City,Hyderabad,Telangana,43397000,2454,4,4,Semi-Furnished,17.43143,78.367645,Sale
-172,3 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,13391000,1620,3,2,Unfurnished,17.403097,78.389784,Resale
-173,2 BHK Villa in Shamirpet,Villa,Shamirpet,Hyderabad,Telangana,4968000,925,2,2,Furnished,17.604841,78.554018,Resale
-174,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,6183000,930,2,2,Unfurnished,17.454405,78.306285,Sale
-175,3 BHK House in Maheshwaram,House,Maheshwaram,Hyderabad,Telangana,6952000,1732,3,3,Semi-Furnished,17.133284,78.430119,Sale
-176,3 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,8583000,1404,3,2,Unfurnished,17.214851,78.527404,New Launch
-177,Plot in Tukkuguda,Plot,Tukkuguda,Hyderabad,Telangana,14183000,2674,0,0,NA,17.193369,78.484502,Sale
-178,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,9785000,995,2,1,Furnished,17.45727,78.278902,Sale
-179,4 BHK Villa in Kondapur,Villa,Kondapur,Hyderabad,Telangana,30759000,2705,4,4,Semi-Furnished,17.465701,78.358681,Sale
-180,Plot in Jubilee Hills,Plot,Jubilee Hills,Hyderabad,Telangana,17192000,1254,0,0,NA,17.419106,78.420278,Sale
-181,2 BHK Apartment in HITEC City,Apartment,HITEC City,Hyderabad,Telangana,11994000,966,2,1,Semi-Furnished,17.437403,78.386665,Sale
-182,3 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,10335000,1701,3,3,Unfurnished,17.413312,78.371389,Sale
-183,Plot in Tukkuguda,Plot,Tukkuguda,Hyderabad,Telangana,7560000,1768,0,0,NA,17.216166,78.499232,Sale
-184,3 BHK House in Gachibowli,House,Gachibowli,Hyderabad,Telangana,26368000,1485,3,3,Unfurnished,17.43904,78.354988,Sale
-185,Plot in Kondapur,Plot,Kondapur,Hyderabad,Telangana,23005000,2702,0,0,NA,17.471107,78.349936,New Launch
-186,3 BHK House in Banjara Hills,House,Banjara Hills,Hyderabad,Telangana,32687000,1924,3,2,Furnished,17.412977,78.429456,Sale
-187,3 BHK Villa in Manikonda,Villa,Manikonda,Hyderabad,Telangana,16076000,1680,3,2,Furnished,17.404437,78.381617,Sale
-188,2 BHK Apartment in HITEC City,Apartment,HITEC City,Hyderabad,Telangana,15610000,907,2,1,Semi-Furnished,17.448296,78.369892,New Launch
-189,1 BHK Villa in Kokapet,Villa,Kokapet,Hyderabad,Telangana,10123000,636,1,1,Furnished,17.398208,78.339696,New Launch
-190,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,9448000,965,2,2,Semi-Furnished,17.454829,78.280654,New Launch
-191,Plot in Maheshwaram,Plot,Maheshwaram,Hyderabad,Telangana,5737000,1296,0,0,NA,17.132228,78.425117,New Launch
-192,1 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,10152000,733,1,1,Semi-Furnished,17.412345,78.432259,Sale
-193,2 BHK House in Shamirpet,House,Shamirpet,Hyderabad,Telangana,6798000,1036,2,1,Unfurnished,17.599206,78.580734,Sale
-194,3 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,19450000,1600,3,2,Unfurnished,17.445187,78.418336,Resale
-195,2 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,14479000,1284,2,2,Furnished,17.438083,78.359531,Resale
-196,4 BHK House in Gachibowli,House,Gachibowli,Hyderabad,Telangana,61314000,3023,4,3,Unfurnished,17.43376,78.342899,Sale
-197,3 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,6269000,1610,3,3,Unfurnished,17.235169,78.522075,Sale
-198,2 BHK House in Narsingi,House,Narsingi,Hyderabad,Telangana,9753000,1005,2,2,Unfurnished,17.377413,78.343556,Resale
-199,2 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,8693000,1109,2,2,Furnished,17.481174,78.360575,Resale
-200,3 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,11059000,1610,3,2,Semi-Furnished,17.464907,78.301575,Resale
+1,3 BHK Villa in Patancheru,Villa,Patancheru,Hyderabad,Telangana,15293000,1978,3,2,Unfurnished,17.541507,78.280739,New Launch
+2,3 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,17223000,1656,3,2,Furnished,17.462841,78.300394,Resale
+3,4 BHK Apartment in Madhapur,Apartment,Madhapur,Hyderabad,Telangana,37789000,2804,4,4,Semi-Furnished,17.434965,78.387276,Resale
+4,2 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,9275000,1229,2,1,Furnished,17.480718,78.406301,Resale
+5,2 BHK House in Madhapur,House,Madhapur,Hyderabad,Telangana,14184000,1213,2,1,Unfurnished,17.434758,78.379048,Sale
+6,1 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,10137000,776,1,1,Furnished,17.399403,78.342577,New Launch
+7,Plot in Gachibowli,Plot,Gachibowli,Hyderabad,Telangana,77661000,4472,0,0,NA,17.438207,78.362194,Sale
+8,1 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,8389000,689,1,1,Unfurnished,17.406142,78.438082,New Launch
+9,1 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,9221000,853,1,1,Unfurnished,17.435965,78.412247,New Launch
+10,3 BHK Apartment in Maheshwaram,Apartment,Maheshwaram,Hyderabad,Telangana,5737000,1591,3,3,Unfurnished,17.132074,78.431643,New Launch
+11,Plot in Narsingi,Plot,Narsingi,Hyderabad,Telangana,30710000,4067,0,0,NA,17.389942,78.358103,Sale
+12,1 BHK House in Financial District,House,Financial District,Hyderabad,Telangana,10757000,728,1,1,Unfurnished,17.414123,78.331038,Sale
+13,3 BHK Villa in Miyapur,Villa,Miyapur,Hyderabad,Telangana,22527000,1684,3,2,Unfurnished,17.4889,78.351607,New Launch
+14,2 BHK Villa in Medchal,Villa,Medchal,Hyderabad,Telangana,4887000,931,2,1,Unfurnished,17.622596,78.479421,New Launch
+15,4 BHK House in Tellapur,House,Tellapur,Hyderabad,Telangana,17922000,2204,4,5,Furnished,17.467196,78.305233,Sale
+16,Plot in Kukatpally,Plot,Kukatpally,Hyderabad,Telangana,21521000,2437,0,0,NA,17.477928,78.411074,Resale
+17,Plot in Kukatpally,Plot,Kukatpally,Hyderabad,Telangana,26863000,2778,0,0,NA,17.495365,78.393027,Sale
+18,3 BHK Villa in Miyapur,Villa,Miyapur,Hyderabad,Telangana,17439000,1830,3,2,Furnished,17.505057,78.366686,Resale
+19,Plot in Kukatpally,Plot,Kukatpally,Hyderabad,Telangana,33314000,4373,0,0,NA,17.494856,78.421238,Sale
+20,2 BHK Villa in Nallagandla,Villa,Nallagandla,Hyderabad,Telangana,15706000,1297,2,1,Semi-Furnished,17.479704,78.305075,Sale
+21,2 BHK House in Manikonda,House,Manikonda,Hyderabad,Telangana,16918000,1349,2,2,Furnished,17.402182,78.394137,New Launch
+22,2 BHK House in Banjara Hills,House,Banjara Hills,Hyderabad,Telangana,14774000,921,2,1,Semi-Furnished,17.412263,78.419715,Resale
+23,1 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,5977000,631,1,1,Unfurnished,17.506757,78.350864,Sale
+24,3 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,10203000,2078,3,2,Unfurnished,17.241101,78.544556,New Launch
+25,4 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,27994000,3818,4,4,Unfurnished,17.457152,78.308838,Resale
+26,Plot in Banjara Hills,Plot,Banjara Hills,Hyderabad,Telangana,18241000,1466,0,0,NA,17.423513,78.448027,Sale
+27,Plot in Miyapur,Plot,Miyapur,Hyderabad,Telangana,35140000,3843,0,0,NA,17.498638,78.373866,New Launch
+28,2 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,18423000,1266,2,1,Furnished,17.450269,78.358813,Sale
+29,2 BHK House in Manikonda,House,Manikonda,Hyderabad,Telangana,12231000,993,2,2,Furnished,17.394295,78.376234,Sale
+30,1 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,6449000,706,1,1,Unfurnished,17.481613,78.307586,New Launch
+31,Plot in Shamirpet,Plot,Shamirpet,Hyderabad,Telangana,15365000,2588,0,0,NA,17.5986,78.565019,New Launch
+32,2 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,9632000,1349,2,1,Unfurnished,17.483169,78.346979,Resale
+33,1 BHK House in Madhapur,House,Madhapur,Hyderabad,Telangana,11138000,731,1,1,Furnished,17.435989,78.391253,New Launch
+34,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,15998000,1918,3,2,Semi-Furnished,17.481857,78.31757,Sale
+35,2 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,18872000,1208,2,2,Furnished,17.404761,78.340252,Resale
+36,Plot in Shamirpet,Plot,Shamirpet,Hyderabad,Telangana,25895000,4588,0,0,NA,17.610352,78.575555,Sale
+37,2 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,5246000,1385,2,1,Unfurnished,17.220033,78.551405,Resale
+38,3 BHK Apartment in HITEC City,Apartment,HITEC City,Hyderabad,Telangana,28065000,1758,3,3,Furnished,17.441001,78.369381,New Launch
+39,2 BHK Villa in Adibatla,Villa,Adibatla,Hyderabad,Telangana,7910000,1186,2,2,Semi-Furnished,17.231949,78.551033,New Launch
+40,2 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,14551000,962,2,1,Furnished,17.442863,78.337444,Resale
+41,3 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,13673000,2101,3,3,Unfurnished,17.458071,78.363525,New Launch
+42,4 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,37870000,3539,4,4,Furnished,17.490156,78.405664,Resale
+43,3 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,29891000,1673,3,2,Unfurnished,17.413931,78.438054,Resale
+44,2 BHK Villa in Shadnagar,Villa,Shadnagar,Hyderabad,Telangana,4329000,1066,2,2,Unfurnished,17.057584,78.216862,Resale
+45,Plot in Madhapur,Plot,Madhapur,Hyderabad,Telangana,79358000,4871,0,0,NA,17.453957,78.402759,Sale
+46,3 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,13489000,1587,3,3,Furnished,17.467783,78.371595,Sale
+47,2 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,12159000,1095,2,2,Unfurnished,17.401948,78.356633,New Launch
+48,4 BHK Apartment in Patancheru,Apartment,Patancheru,Hyderabad,Telangana,25005000,4153,4,3,Unfurnished,17.520668,78.2623,New Launch
+49,2 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,16936000,1093,2,1,Furnished,17.422804,78.437864,Sale
+50,3 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,11225000,1866,3,3,Semi-Furnished,17.238728,78.53638,Sale
+51,2 BHK Apartment in Tukkuguda,Apartment,Tukkuguda,Hyderabad,Telangana,4563000,1205,2,1,Unfurnished,17.205428,78.497152,Resale
+52,4 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,54843000,3761,4,3,Unfurnished,17.415424,78.43738,Resale
+53,3 BHK House in Manikonda,House,Manikonda,Hyderabad,Telangana,21950000,1865,3,3,Semi-Furnished,17.397328,78.383397,Resale
+54,Plot in Maheshwaram,Plot,Maheshwaram,Hyderabad,Telangana,7598000,2406,0,0,NA,17.14353,78.421254,Resale
+55,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,14919000,1574,3,3,Semi-Furnished,17.458865,78.327714,Sale
+56,4 BHK Apartment in Tukkuguda,Apartment,Tukkuguda,Hyderabad,Telangana,13574000,2957,4,4,Furnished,17.196055,78.495337,Resale
+57,Plot in Gachibowli,Plot,Gachibowli,Hyderabad,Telangana,32860000,2799,0,0,NA,17.439823,78.359317,Resale
+58,3 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,16463000,1949,3,3,Unfurnished,17.485483,78.34897,Sale
+59,2 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,3482000,1107,2,1,Unfurnished,17.234711,78.539457,New Launch
+60,3 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,8887000,2180,3,3,Furnished,17.068009,78.19874,New Launch
+61,2 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,22977000,1352,2,1,Unfurnished,17.417566,78.435526,New Launch
+62,1 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,5172000,774,1,1,Semi-Furnished,17.498131,78.395757,Sale
+63,Plot in Kondapur,Plot,Kondapur,Hyderabad,Telangana,23913000,2538,0,0,NA,17.475772,78.363674,Sale
+64,3 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,9157000,2134,3,2,Furnished,17.640535,78.48415,Resale
+65,3 BHK Apartment in Madhapur,Apartment,Madhapur,Hyderabad,Telangana,21258000,1712,3,2,Furnished,17.443275,78.393183,Resale
+66,Plot in Narsingi,Plot,Narsingi,Hyderabad,Telangana,34792000,3978,0,0,NA,17.396576,78.365063,Resale
+67,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,7268000,1007,2,1,Furnished,17.460095,78.28846,New Launch
+68,3 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,12151000,1444,3,3,Unfurnished,17.496604,78.403117,Sale
+69,3 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,16446000,1909,3,2,Furnished,17.392659,78.343452,New Launch
+70,3 BHK Apartment in HITEC City,Apartment,HITEC City,Hyderabad,Telangana,24805000,2117,3,3,Unfurnished,17.453278,78.370743,Sale
+71,2 BHK Villa in Kondapur,Villa,Kondapur,Hyderabad,Telangana,16507000,1261,2,1,Semi-Furnished,17.44968,78.362404,Resale
+72,3 BHK House in Nallagandla,House,Nallagandla,Hyderabad,Telangana,23929000,1955,3,3,Furnished,17.470247,78.326997,Resale
+73,4 BHK House in Kukatpally,House,Kukatpally,Hyderabad,Telangana,36869000,3846,4,3,Semi-Furnished,17.481501,78.402721,New Launch
+74,3 BHK House in Shadnagar,House,Shadnagar,Hyderabad,Telangana,9829000,1946,3,2,Unfurnished,17.077906,78.204543,Sale
+75,3 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,9046000,1421,3,2,Unfurnished,17.449063,78.359782,New Launch
+76,3 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,14291000,2184,3,3,Semi-Furnished,17.471746,78.395756,New Launch
+77,3 BHK House in Kukatpally,House,Kukatpally,Hyderabad,Telangana,18151000,1918,3,3,Unfurnished,17.482048,78.400494,Resale
+78,2 BHK House in Patancheru,House,Patancheru,Hyderabad,Telangana,7877000,1026,2,1,Furnished,17.542139,78.263192,New Launch
+79,Plot in Kukatpally,Plot,Kukatpally,Hyderabad,Telangana,19877000,2658,0,0,NA,17.476236,78.402837,Sale
+80,3 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,11965000,1491,3,2,Furnished,17.506029,78.371937,New Launch
+81,2 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,3217000,905,2,1,Semi-Furnished,17.217963,78.525843,New Launch
+82,2 BHK Apartment in Maheshwaram,Apartment,Maheshwaram,Hyderabad,Telangana,5228000,909,2,2,Semi-Furnished,17.139082,78.438624,Sale
+83,3 BHK Apartment in Madhapur,Apartment,Madhapur,Hyderabad,Telangana,20665000,2037,3,3,Unfurnished,17.43935,78.382906,Sale
+84,2 BHK Villa in Banjara Hills,Villa,Banjara Hills,Hyderabad,Telangana,27188000,1240,2,2,Semi-Furnished,17.421126,78.432937,Sale
+85,2 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,8474000,1233,2,1,Furnished,17.469997,78.356279,Resale
+86,3 BHK Apartment in HITEC City,Apartment,HITEC City,Hyderabad,Telangana,35286000,1885,3,3,Semi-Furnished,17.455637,78.376232,Resale
+87,3 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,12724000,1829,3,3,Unfurnished,17.457049,78.304221,New Launch
+88,4 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,14864000,3164,4,3,Semi-Furnished,17.252534,78.435771,New Launch
+89,2 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,21235000,1189,2,1,Furnished,17.43173,78.392481,Sale
+90,1 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,4004000,758,1,1,Semi-Furnished,17.057819,78.22256,New Launch
+91,1 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,3409000,552,1,1,Unfurnished,17.232022,78.539484,New Launch
+92,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,11533000,1804,3,2,Unfurnished,17.476964,78.310501,New Launch
+93,2 BHK House in Miyapur,House,Miyapur,Hyderabad,Telangana,7958000,1153,2,2,Unfurnished,17.485653,78.352905,Sale
+94,4 BHK House in HITEC City,House,HITEC City,Hyderabad,Telangana,84647000,4131,4,4,Unfurnished,17.449337,78.36856,New Launch
+95,Plot in Narsingi,Plot,Narsingi,Hyderabad,Telangana,11332000,1709,0,0,NA,17.367394,78.363954,Resale
+96,2 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,6303000,934,2,1,Semi-Furnished,17.255842,78.424556,Sale
+97,3 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,9312000,1468,3,3,Semi-Furnished,17.451981,78.344655,New Launch
+98,Plot in Tellapur,Plot,Tellapur,Hyderabad,Telangana,33986000,4671,0,0,NA,17.454436,78.29787,Resale
+99,2 BHK Villa in Medchal,Villa,Medchal,Hyderabad,Telangana,6630000,1002,2,2,Unfurnished,17.61899,78.492723,New Launch
+100,2 BHK Apartment in Patancheru,Apartment,Patancheru,Hyderabad,Telangana,7675000,1240,2,1,Furnished,17.520756,78.275918,New Launch
+101,2 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,9062000,1220,2,1,Unfurnished,17.397024,78.394041,Resale
+102,Plot in Miyapur,Plot,Miyapur,Hyderabad,Telangana,32739000,4475,0,0,NA,17.490135,78.349871,Resale
+103,3 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,23190000,2123,3,3,Unfurnished,17.424334,78.437777,Resale
+104,Plot in Kondapur,Plot,Kondapur,Hyderabad,Telangana,44045000,4560,0,0,NA,17.469782,78.366957,Sale
+105,2 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,9445000,934,2,2,Furnished,17.471473,78.355168,Resale
+106,3 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,10846000,2053,3,2,Unfurnished,17.630969,78.489303,Resale
+107,3 BHK House in Kokapet,House,Kokapet,Hyderabad,Telangana,25902000,2070,3,3,Unfurnished,17.398432,78.332368,Resale
+108,2 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,19088000,1141,2,1,Furnished,17.438866,78.412518,Resale
+109,3 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,7581000,1502,3,2,Semi-Furnished,17.065485,78.2165,New Launch
+110,4 BHK Villa in Maheshwaram,Villa,Maheshwaram,Hyderabad,Telangana,28689000,3895,4,5,Unfurnished,17.138866,78.426542,New Launch
+111,3 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,13731000,1458,3,3,Semi-Furnished,17.395281,78.390248,Sale
+112,2 BHK House in HITEC City,House,HITEC City,Hyderabad,Telangana,11926000,955,2,2,Semi-Furnished,17.45068,78.383178,Resale
+113,2 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,8394000,1315,2,1,Unfurnished,17.497857,78.34958,Resale
+114,2 BHK House in Narsingi,House,Narsingi,Hyderabad,Telangana,7210000,943,2,1,Semi-Furnished,17.392595,78.358156,Sale
+115,1 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,6479000,686,1,1,Furnished,17.478667,78.412509,New Launch
+116,2 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,21876000,1345,2,1,Semi-Furnished,17.445498,78.360562,New Launch
+117,3 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,32147000,1845,3,3,Semi-Furnished,17.390837,78.345479,Sale
+118,2 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,8872000,1031,2,1,Unfurnished,17.47313,78.311274,New Launch
+119,3 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,19222000,1863,3,2,Furnished,17.488255,78.39563,Resale
+120,3 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,21917000,2182,3,2,Semi-Furnished,17.486641,78.365812,Sale
+121,2 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,15207000,949,2,2,Semi-Furnished,17.438738,78.415719,New Launch
+122,2 BHK House in Tukkuguda,House,Tukkuguda,Hyderabad,Telangana,5645000,988,2,1,Semi-Furnished,17.194975,78.474274,Resale
+123,2 BHK House in Gachibowli,House,Gachibowli,Hyderabad,Telangana,18273000,1077,2,2,Semi-Furnished,17.429326,78.354715,Sale
+124,3 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,19964000,2173,3,2,Furnished,17.470422,78.285229,Sale
+125,2 BHK House in HITEC City,House,HITEC City,Hyderabad,Telangana,15444000,1160,2,1,Furnished,17.436648,78.370158,Sale
+126,3 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,19395000,2177,3,2,Unfurnished,17.483539,78.420369,Sale
+127,1 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,13913000,898,1,1,Furnished,17.413094,78.334512,New Launch
+128,2 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,17450000,1301,2,1,Semi-Furnished,17.404215,78.425761,New Launch
+129,1 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,7240000,887,1,1,Semi-Furnished,17.47407,78.405412,New Launch
+130,3 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,12895000,1978,3,3,Unfurnished,17.370465,78.358044,New Launch
+131,2 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,4673000,1154,2,2,Unfurnished,17.620629,78.467738,New Launch
+132,3 BHK Apartment in Tukkuguda,Apartment,Tukkuguda,Hyderabad,Telangana,5377000,1426,3,2,Furnished,17.200257,78.487994,New Launch
+133,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,14434000,1720,3,2,Furnished,17.466242,78.32287,Resale
+134,2 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,6043000,901,2,1,Semi-Furnished,17.392093,78.371614,Resale
+135,3 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,17123000,1788,3,2,Furnished,17.461809,78.289303,New Launch
+136,2 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,6495000,1066,2,1,Unfurnished,17.36976,78.349182,New Launch
+137,3 BHK House in Nallagandla,House,Nallagandla,Hyderabad,Telangana,20781000,1751,3,2,Furnished,17.481887,78.318434,Sale
+138,3 BHK House in Shamshabad,House,Shamshabad,Hyderabad,Telangana,5507000,1429,3,3,Unfurnished,17.261434,78.437308,Sale
+139,3 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,13891000,1957,3,2,Furnished,17.394898,78.360499,Sale
+140,1 BHK Villa in Gachibowli,Villa,Gachibowli,Hyderabad,Telangana,14424000,689,1,1,Semi-Furnished,17.450581,78.346936,New Launch
+141,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,7560000,983,2,1,Semi-Furnished,17.457886,78.282903,New Launch
+142,2 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,4529000,1082,2,2,Furnished,17.253629,78.436112,New Launch
+143,3 BHK Villa in Shadnagar,Villa,Shadnagar,Hyderabad,Telangana,14094000,1740,3,3,Unfurnished,17.061231,78.208225,Resale
+144,Plot in Nallagandla,Plot,Nallagandla,Hyderabad,Telangana,11051000,1365,0,0,NA,17.480776,78.333074,Resale
+145,3 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,9048000,1665,3,2,Furnished,17.247172,78.420344,New Launch
+146,3 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,12985000,1948,3,2,Unfurnished,17.384425,78.352672,Resale
+147,Plot in Jubilee Hills,Plot,Jubilee Hills,Hyderabad,Telangana,27715000,2261,0,0,NA,17.427745,78.396524,Resale
+148,2 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,10494000,1213,2,2,Semi-Furnished,17.486099,78.416183,New Launch
+149,Plot in Manikonda,Plot,Manikonda,Hyderabad,Telangana,10721000,1330,0,0,NA,17.396249,78.371276,Sale
+150,3 BHK Apartment in Patancheru,Apartment,Patancheru,Hyderabad,Telangana,9508000,1659,3,2,Unfurnished,17.524824,78.270824,Sale
+151,2 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,7291000,1187,2,1,Furnished,17.642816,78.487826,Resale
+152,2 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,8148000,1000,2,2,Semi-Furnished,17.457564,78.371886,Resale
+153,3 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,18449000,1599,3,3,Furnished,17.428221,78.411446,Resale
+154,2 BHK Villa in Shamirpet,Villa,Shamirpet,Hyderabad,Telangana,5996000,1157,2,2,Furnished,17.593004,78.55947,Resale
+155,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,10065000,1086,2,2,Semi-Furnished,17.451017,78.295331,Sale
+156,3 BHK House in Kukatpally,House,Kukatpally,Hyderabad,Telangana,17157000,1810,3,2,Semi-Furnished,17.472051,78.41179,New Launch
+157,4 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,48701000,3804,4,5,Semi-Furnished,17.404889,78.338364,Sale
+158,4 BHK Apartment in Maheshwaram,Apartment,Maheshwaram,Hyderabad,Telangana,13979000,2556,4,4,Furnished,17.138824,78.433508,Sale
+159,Plot in Tukkuguda,Plot,Tukkuguda,Hyderabad,Telangana,18859000,3406,0,0,NA,17.198448,78.470308,Sale
+160,1 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,12641000,753,1,1,Semi-Furnished,17.416352,78.427721,Sale
+161,Plot in Adibatla,Plot,Adibatla,Hyderabad,Telangana,10258000,2551,0,0,NA,17.22721,78.527835,Resale
+162,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,7833000,1222,2,2,Unfurnished,17.464197,78.286394,Resale
+163,4 BHK House in Shadnagar,House,Shadnagar,Hyderabad,Telangana,28604000,3966,4,4,Semi-Furnished,17.05678,78.207422,Sale
+164,2 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,10842000,928,2,1,Semi-Furnished,17.39952,78.350545,Resale
+165,3 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,15156000,1469,3,3,Semi-Furnished,17.501524,78.368969,Sale
+166,Plot in Maheshwaram,Plot,Maheshwaram,Hyderabad,Telangana,7300000,1215,0,0,NA,17.137487,78.424251,New Launch
+167,2 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,8788000,1299,2,2,Furnished,17.245419,78.435472,Sale
+168,3 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,28332000,1808,3,3,Furnished,17.384612,78.345651,Sale
+169,Plot in Kukatpally,Plot,Kukatpally,Hyderabad,Telangana,22509000,3438,0,0,NA,17.491645,78.410553,New Launch
+170,3 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,22245000,2141,3,2,Unfurnished,17.4386,78.341796,Sale
+171,Plot in Patancheru,Plot,Patancheru,Hyderabad,Telangana,28437000,4925,0,0,NA,17.538617,78.270278,Resale
+172,2 BHK House in Patancheru,House,Patancheru,Hyderabad,Telangana,9182000,1178,2,2,Semi-Furnished,17.536608,78.257346,Resale
+173,2 BHK Apartment in Shamirpet,Apartment,Shamirpet,Hyderabad,Telangana,3346000,904,2,2,Unfurnished,17.593061,78.572989,Sale
+174,1 BHK House in Patancheru,House,Patancheru,Hyderabad,Telangana,3266000,650,1,1,Semi-Furnished,17.529562,78.260317,Sale
+175,1 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,4423000,561,1,1,Unfurnished,17.472945,78.403614,New Launch
+176,3 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,12639000,1542,3,3,Semi-Furnished,17.385265,78.342828,New Launch
+177,3 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,15968000,2008,3,3,Unfurnished,17.4575,78.305668,Sale
+178,Plot in Narsingi,Plot,Narsingi,Hyderabad,Telangana,30018000,4823,0,0,NA,17.392457,78.362799,Resale
+179,Plot in Kukatpally,Plot,Kukatpally,Hyderabad,Telangana,29705000,4577,0,0,NA,17.472108,78.405492,Sale
+180,3 BHK House in Kukatpally,House,Kukatpally,Hyderabad,Telangana,19562000,2167,3,2,Semi-Furnished,17.479106,78.405939,New Launch
+181,3 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,14934000,1780,3,3,Furnished,17.456263,78.299341,Sale
+182,4 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,53570000,3094,4,3,Furnished,17.405251,78.339115,Sale
+183,2 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,7803000,1033,2,2,Furnished,17.455183,78.29949,Sale
+184,4 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,15698000,2505,4,4,Furnished,17.063683,78.205176,Sale
+185,3 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,16859000,1847,3,3,Unfurnished,17.401631,78.390517,New Launch
+186,2 BHK Apartment in Patancheru,Apartment,Patancheru,Hyderabad,Telangana,8394000,1180,2,2,Furnished,17.514198,78.272456,Resale
+187,2 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,9746000,1138,2,2,Semi-Furnished,17.457158,78.303714,New Launch
+188,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,14419000,1726,3,3,Semi-Furnished,17.46793,78.305071,New Launch
+189,Plot in Kokapet,Plot,Kokapet,Hyderabad,Telangana,87731000,4890,0,0,NA,17.401538,78.343887,Sale
+190,2 BHK Villa in Tellapur,Villa,Tellapur,Hyderabad,Telangana,10864000,1125,2,1,Unfurnished,17.464855,78.291886,Resale
+191,3 BHK House in Nallagandla,House,Nallagandla,Hyderabad,Telangana,22682000,2149,3,2,Semi-Furnished,17.470135,78.323283,New Launch
+192,2 BHK Apartment in HITEC City,Apartment,HITEC City,Hyderabad,Telangana,22125000,1190,2,2,Furnished,17.434293,78.385692,Sale
+193,3 BHK House in HITEC City,House,HITEC City,Hyderabad,Telangana,30577000,1904,3,3,Furnished,17.429506,78.39022,Sale
+194,3 BHK House in Medchal,House,Medchal,Hyderabad,Telangana,8897000,1893,3,2,Unfurnished,17.631687,78.49154,New Launch
+195,3 BHK Apartment in Madhapur,Apartment,Madhapur,Hyderabad,Telangana,35651000,2072,3,3,Furnished,17.437958,78.384271,New Launch
+196,Plot in Kondapur,Plot,Kondapur,Hyderabad,Telangana,12974000,1507,0,0,NA,17.450851,78.344615,New Launch
+197,2 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,6128000,1281,2,1,Unfurnished,17.62827,78.480424,Resale
+198,2 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,22195000,1258,2,1,Semi-Furnished,17.433849,78.398954,Sale
+199,2 BHK House in Banjara Hills,House,Banjara Hills,Hyderabad,Telangana,15198000,1135,2,2,Furnished,17.404654,78.448058,Sale
+200,2 BHK Villa in Adibatla,Villa,Adibatla,Hyderabad,Telangana,7117000,917,2,2,Semi-Furnished,17.214413,78.531865,New Launch
+201,Plot in Adibatla,Plot,Adibatla,Hyderabad,Telangana,19160000,4272,0,0,NA,17.214546,78.547936,Resale
+202,3 BHK Villa in Maheshwaram,Villa,Maheshwaram,Hyderabad,Telangana,10487000,1691,3,3,Semi-Furnished,17.140413,78.429467,New Launch
+203,3 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,21556000,1984,3,3,Furnished,17.401275,78.393436,Resale
+204,Plot in Madhapur,Plot,Madhapur,Hyderabad,Telangana,30657000,1978,0,0,NA,17.440381,78.405975,Resale
+205,4 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,70493000,4071,4,5,Unfurnished,17.443478,78.413997,Sale
+206,3 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,14143000,1618,3,3,Semi-Furnished,17.470149,78.305818,New Launch
+207,3 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,16982000,1614,3,2,Furnished,17.450465,78.351365,New Launch
+208,Plot in Madhapur,Plot,Madhapur,Hyderabad,Telangana,77591000,4668,0,0,NA,17.443673,78.393511,New Launch
+209,2 BHK House in Manikonda,House,Manikonda,Hyderabad,Telangana,12404000,1221,2,2,Furnished,17.404856,78.379785,New Launch
+210,4 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,17426000,2877,4,5,Unfurnished,17.458089,78.306326,Resale
+211,4 BHK Villa in Shamshabad,Villa,Shamshabad,Hyderabad,Telangana,21754000,2575,4,4,Unfurnished,17.267592,78.426366,Resale
+212,2 BHK Villa in Manikonda,Villa,Manikonda,Hyderabad,Telangana,11758000,1201,2,2,Unfurnished,17.396456,78.384652,Resale
+213,3 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,8606000,1403,3,3,Unfurnished,17.055618,78.207489,New Launch
+214,2 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,11763000,1297,2,2,Furnished,17.46412,78.35769,Resale
+215,2 BHK Apartment in Maheshwaram,Apartment,Maheshwaram,Hyderabad,Telangana,5255000,1237,2,2,Furnished,17.144009,78.427275,Sale
+216,3 BHK Apartment in Kukatpally,Apartment,Kukatpally,Hyderabad,Telangana,10914000,1409,3,2,Unfurnished,17.490266,78.412527,New Launch
+217,3 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,11795000,2165,3,3,Unfurnished,17.255747,78.424174,Sale
+218,Plot in Banjara Hills,Plot,Banjara Hills,Hyderabad,Telangana,36064000,2285,0,0,NA,17.423715,78.433363,Resale
+219,3 BHK Apartment in Shamirpet,Apartment,Shamirpet,Hyderabad,Telangana,10178000,1969,3,2,Unfurnished,17.607905,78.578661,Resale
+220,3 BHK Apartment in Tukkuguda,Apartment,Tukkuguda,Hyderabad,Telangana,12291000,2084,3,2,Semi-Furnished,17.191049,78.494616,New Launch
+221,4 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,9515000,2685,4,5,Semi-Furnished,17.250075,78.429895,Resale
+222,3 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,36222000,2165,3,2,Semi-Furnished,17.399619,78.342933,New Launch
+223,2 BHK Apartment in Patancheru,Apartment,Patancheru,Hyderabad,Telangana,4910000,1016,2,1,Semi-Furnished,17.52589,78.263168,Sale
+224,3 BHK Apartment in Shamirpet,Apartment,Shamirpet,Hyderabad,Telangana,9716000,2133,3,3,Furnished,17.594889,78.568326,Sale
+225,3 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,23132000,1905,3,3,Unfurnished,17.403429,78.346148,Resale
+226,2 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,6350000,1174,2,1,Furnished,17.629537,78.489125,Resale
+227,2 BHK Apartment in Madhapur,Apartment,Madhapur,Hyderabad,Telangana,18051000,1231,2,1,Unfurnished,17.447876,78.393572,Sale
+228,3 BHK House in Adibatla,House,Adibatla,Hyderabad,Telangana,10086000,1490,3,2,Unfurnished,17.22098,78.536151,Sale
+229,2 BHK House in Miyapur,House,Miyapur,Hyderabad,Telangana,9188000,943,2,1,Furnished,17.502725,78.364601,Sale
+230,2 BHK Apartment in Patancheru,Apartment,Patancheru,Hyderabad,Telangana,4756000,936,2,1,Furnished,17.53471,78.280986,Resale
+231,Plot in Tellapur,Plot,Tellapur,Hyderabad,Telangana,36961000,4245,0,0,NA,17.44384,78.288745,Sale
+232,2 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,13314000,1304,2,1,Furnished,17.490277,78.363431,Sale
+233,2 BHK Villa in Jubilee Hills,Villa,Jubilee Hills,Hyderabad,Telangana,17892000,1188,2,1,Semi-Furnished,17.427139,78.411284,New Launch
+234,3 BHK House in Maheshwaram,House,Maheshwaram,Hyderabad,Telangana,11430000,1732,3,3,Furnished,17.149019,78.449799,Sale
+235,2 BHK Apartment in Kondapur,Apartment,Kondapur,Hyderabad,Telangana,11389000,1156,2,1,Semi-Furnished,17.464105,78.344218,Resale
+236,1 BHK Villa in Manikonda,Villa,Manikonda,Hyderabad,Telangana,7001000,605,1,1,Furnished,17.414245,78.391877,Resale
+237,2 BHK House in Shadnagar,House,Shadnagar,Hyderabad,Telangana,3704000,987,2,2,Unfurnished,17.059079,78.221557,New Launch
+238,2 BHK Apartment in Maheshwaram,Apartment,Maheshwaram,Hyderabad,Telangana,5148000,1184,2,1,Furnished,17.125511,78.42833,New Launch
+239,2 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,14743000,1324,2,2,Semi-Furnished,17.422711,78.330815,Resale
+240,3 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,15386000,1726,3,2,Semi-Furnished,17.45413,78.277094,Sale
+241,3 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,30993000,1742,3,3,Furnished,17.442686,78.340044,Sale
+242,4 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,36944000,3984,4,5,Unfurnished,17.446453,78.287339,New Launch
+243,Plot in Narsingi,Plot,Narsingi,Hyderabad,Telangana,36066000,4834,0,0,NA,17.380404,78.348381,Resale
+244,2 BHK House in Shamshabad,House,Shamshabad,Hyderabad,Telangana,9813000,1295,2,2,Furnished,17.239853,78.445269,Sale
+245,Plot in Shamirpet,Plot,Shamirpet,Hyderabad,Telangana,27517000,4552,0,0,NA,17.607572,78.579694,Sale
+246,3 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,15660000,2137,3,2,Unfurnished,17.393139,78.356909,New Launch
+247,4 BHK House in Kukatpally,House,Kukatpally,Hyderabad,Telangana,20798000,2523,4,5,Unfurnished,17.478314,78.410032,Resale
+248,3 BHK Apartment in Jubilee Hills,Apartment,Jubilee Hills,Hyderabad,Telangana,23625000,1601,3,3,Furnished,17.426248,78.415598,Sale
+249,2 BHK Apartment in Shamirpet,Apartment,Shamirpet,Hyderabad,Telangana,5201000,1022,2,1,Semi-Furnished,17.604701,78.570221,Sale
+250,Plot in Narsingi,Plot,Narsingi,Hyderabad,Telangana,23023000,3473,0,0,NA,17.367485,78.342932,Resale
+251,Plot in Madhapur,Plot,Madhapur,Hyderabad,Telangana,23397000,1488,0,0,NA,17.445629,78.382645,New Launch
+252,3 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,30361000,1671,3,2,Semi-Furnished,17.416734,78.445977,Resale
+253,3 BHK House in Medchal,House,Medchal,Hyderabad,Telangana,7784000,2106,3,3,Unfurnished,17.636967,78.48895,New Launch
+254,2 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,9416000,1350,2,2,Semi-Furnished,17.373121,78.34901,Resale
+255,Plot in Shadnagar,Plot,Shadnagar,Hyderabad,Telangana,16830000,4671,0,0,NA,17.080978,78.202743,Sale
+256,2 BHK Villa in Kondapur,Villa,Kondapur,Hyderabad,Telangana,9498000,963,2,2,Unfurnished,17.465996,78.370902,Resale
+257,2 BHK House in Medchal,House,Medchal,Hyderabad,Telangana,5664000,1284,2,1,Semi-Furnished,17.639955,78.488883,Sale
+258,3 BHK House in Financial District,House,Financial District,Hyderabad,Telangana,26856000,1759,3,3,Semi-Furnished,17.427014,78.346106,Sale
+259,Plot in Tellapur,Plot,Tellapur,Hyderabad,Telangana,16436000,2332,0,0,NA,17.449792,78.277257,Resale
+260,1 BHK Apartment in Miyapur,Apartment,Miyapur,Hyderabad,Telangana,6545000,682,1,1,Unfurnished,17.48391,78.349285,New Launch
+261,Plot in Medchal,Plot,Medchal,Hyderabad,Telangana,17673000,2892,0,0,NA,17.627382,78.481656,Resale
+262,3 BHK Villa in Manikonda,Villa,Manikonda,Hyderabad,Telangana,24591000,1962,3,3,Unfurnished,17.404848,78.387804,New Launch
+263,4 BHK Apartment in Shamshabad,Apartment,Shamshabad,Hyderabad,Telangana,9693000,2335,4,4,Unfurnished,17.260027,78.421708,New Launch
+264,3 BHK Apartment in Madhapur,Apartment,Madhapur,Hyderabad,Telangana,36639000,2150,3,2,Furnished,17.451598,78.393231,Sale
+265,Plot in Nallagandla,Plot,Nallagandla,Hyderabad,Telangana,28152000,4513,0,0,NA,17.47494,78.332278,Sale
+266,1 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,5380000,760,1,1,Semi-Furnished,17.387343,78.391837,Sale
+267,2 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,8908000,1215,2,2,Unfurnished,17.484994,78.312568,New Launch
+268,3 BHK House in Jubilee Hills,House,Jubilee Hills,Hyderabad,Telangana,41808000,1844,3,3,Furnished,17.426319,78.412412,Resale
+269,Plot in Shamshabad,Plot,Shamshabad,Hyderabad,Telangana,13252000,2234,0,0,NA,17.265486,78.446296,Resale
+270,2 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,21860000,1311,2,1,Unfurnished,17.443091,78.350555,New Launch
+271,Plot in Miyapur,Plot,Miyapur,Hyderabad,Telangana,12958000,1488,0,0,NA,17.498097,78.362319,Sale
+272,3 BHK Villa in Nallagandla,Villa,Nallagandla,Hyderabad,Telangana,23851000,2131,3,3,Furnished,17.474273,78.314721,Resale
+273,2 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,5815000,1220,2,2,Furnished,17.055398,78.203237,New Launch
+274,Plot in Shadnagar,Plot,Shadnagar,Hyderabad,Telangana,25323000,4637,0,0,NA,17.055725,78.221978,Sale
+275,Plot in Tukkuguda,Plot,Tukkuguda,Hyderabad,Telangana,7905000,2424,0,0,NA,17.211776,78.475762,New Launch
+276,3 BHK House in Tukkuguda,House,Tukkuguda,Hyderabad,Telangana,13040000,1774,3,2,Unfurnished,17.207175,78.482983,Resale
+277,3 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,11363000,2094,3,3,Furnished,17.619644,78.493406,New Launch
+278,3 BHK Villa in Maheshwaram,Villa,Maheshwaram,Hyderabad,Telangana,9110000,1927,3,3,Unfurnished,17.147249,78.42727,New Launch
+279,2 BHK Apartment in Medchal,Apartment,Medchal,Hyderabad,Telangana,6541000,1243,2,1,Furnished,17.628257,78.495193,Resale
+280,2 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,21871000,1367,2,1,Unfurnished,17.380774,78.342723,Sale
+281,2 BHK Apartment in Shadnagar,Apartment,Shadnagar,Hyderabad,Telangana,9236000,1364,2,2,Furnished,17.057465,78.20925,Resale
+282,2 BHK Apartment in Nallagandla,Apartment,Nallagandla,Hyderabad,Telangana,7006000,900,2,1,Furnished,17.470951,78.304769,New Launch
+283,2 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,8967000,1376,2,1,Unfurnished,17.411759,78.387863,Resale
+284,2 BHK Apartment in Gachibowli,Apartment,Gachibowli,Hyderabad,Telangana,15834000,1334,2,2,Semi-Furnished,17.42782,78.34427,Sale
+285,Plot in Gachibowli,Plot,Gachibowli,Hyderabad,Telangana,32586000,2143,0,0,NA,17.448927,78.35631,Resale
+286,3 BHK House in Miyapur,House,Miyapur,Hyderabad,Telangana,20079000,1981,3,3,Semi-Furnished,17.493107,78.356446,Sale
+287,1 BHK House in Shamirpet,House,Shamirpet,Hyderabad,Telangana,6476000,856,1,1,Semi-Furnished,17.599663,78.552317,New Launch
+288,3 BHK Villa in Shamshabad,Villa,Shamshabad,Hyderabad,Telangana,12566000,1578,3,2,Semi-Furnished,17.242272,78.443584,Sale
+289,3 BHK Apartment in Adibatla,Apartment,Adibatla,Hyderabad,Telangana,11657000,1645,3,3,Furnished,17.230678,78.529883,Resale
+290,3 BHK Apartment in Kokapet,Apartment,Kokapet,Hyderabad,Telangana,23898000,1472,3,3,Furnished,17.389747,78.343654,Resale
+291,2 BHK Villa in Medchal,Villa,Medchal,Hyderabad,Telangana,11208000,1318,2,2,Unfurnished,17.614491,78.482904,Sale
+292,Plot in Narsingi,Plot,Narsingi,Hyderabad,Telangana,14753000,1929,0,0,NA,17.367498,78.352382,New Launch
+293,3 BHK Apartment in Financial District,Apartment,Financial District,Hyderabad,Telangana,16702000,1439,3,2,Unfurnished,17.413787,78.337652,Resale
+294,2 BHK Apartment in Tukkuguda,Apartment,Tukkuguda,Hyderabad,Telangana,6606000,1081,2,1,Unfurnished,17.206987,78.472615,New Launch
+295,3 BHK Apartment in Manikonda,Apartment,Manikonda,Hyderabad,Telangana,14001000,1435,3,3,Unfurnished,17.401971,78.373721,Sale
+296,3 BHK Apartment in Tellapur,Apartment,Tellapur,Hyderabad,Telangana,15981000,2097,3,3,Semi-Furnished,17.461286,78.289741,New Launch
+297,3 BHK Apartment in Banjara Hills,Apartment,Banjara Hills,Hyderabad,Telangana,35803000,2185,3,3,Furnished,17.411777,78.449022,Sale
+298,2 BHK Apartment in Narsingi,Apartment,Narsingi,Hyderabad,Telangana,6972000,923,2,1,Semi-Furnished,17.386584,78.363159,Resale
+299,3 BHK Villa in Maheshwaram,Villa,Maheshwaram,Hyderabad,Telangana,12349000,1649,3,2,Semi-Furnished,17.13604,78.441696,Resale
+300,Plot in Financial District,Plot,Financial District,Hyderabad,Telangana,32299000,2605,0,0,NA,17.414989,78.349838,Resale

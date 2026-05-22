@@ -28,15 +28,77 @@ except Exception as e:
     print(f"CRITICAL: Failed to initialize C engine: {e}")
     engine = None
 
-# --- Hugging Face Integration ---
+# --- Hugging Face Integration & Free LLM fallback ---
 import requests
+import json
 HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2"
-# Note: User should set HF_TOKEN environment variable for production
 HF_TOKEN = os.getenv("HF_TOKEN", "") 
 
+def query_free_llm(prompt: str) -> Optional[str]:
+    """
+    Keyless free LLM provider fallback using DuckDuckGo AI Chat.
+    Extremely robust and has no token or key requirements.
+    """
+    try:
+        # Step 1: Get vqd token
+        status_url = "https://duckduckgo.com/duckchat/v1/status"
+        headers = {
+            "x-vqd-accept": "1",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
+        res = requests.get(status_url, headers=headers, timeout=5)
+        if res.status_code != 200:
+            return None
+        
+        vqd = res.headers.get("x-vqd-4")
+        if not vqd:
+            return None
+        
+        # Step 2: Query the model
+        chat_url = "https://duckduckgo.com/duckchat/v1/chat"
+        chat_headers = {
+            "x-vqd-4": vqd,
+            "Content-Type": "application/json",
+            "Accept": "text/event-stream",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        }
+        payload = {
+            "model": "gpt-4o-mini",
+            "messages": [{"role": "user", "content": prompt}]
+        }
+        response = requests.post(chat_url, headers=chat_headers, json=payload, stream=True, timeout=10)
+        if response.status_code != 200:
+            return None
+        
+        # Parse stream response
+        full_text = []
+        for line in response.iter_lines():
+            if line:
+                line_str = line.decode('utf-8', errors='ignore')
+                if line_str.startswith("data: "):
+                    data_content = line_str[6:]
+                    if data_content == "[DONE]":
+                        break
+                    try:
+                        data_json = json.loads(data_content)
+                        message = data_json.get("message")
+                        if message:
+                            full_text.append(message)
+                    except:
+                        pass
+        return "".join(full_text)
+    except Exception as e:
+        print(f"Free LLM API error: {e}")
+        return None
+
 def query_hf(prompt: str):
+    # Try the free keyless model first
+    free_reply = query_free_llm(prompt)
+    if free_reply:
+        return [{"generated_text": free_reply}]
+
     if not HF_TOKEN:
-        # Improved fallback logic if no token
+        # Fallback to backend local RAG logic if no token
         return None
     headers = {"Authorization": f"Bearer {HF_TOKEN}"}
     payload = {"inputs": prompt, "parameters": {"max_new_tokens": 250, "temperature": 0.7, "return_full_text": False}}
