@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTypewriter } from "../hooks/useTypewriter";
 
 const SAMPLE_SUGGESTIONS = [
   "3BHK near HITEC City under 2Cr",
@@ -6,10 +8,14 @@ const SAMPLE_SUGGESTIONS = [
   "Apartments in Kondapur under 80 Lakhs",
 ];
 
+const EASE = [0.16, 1, 0.3, 1];
+
 export default function AISearchBar({ onAISearch }) {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const placeholderText = useTypewriter();
 
   const handleSearch = async () => {
     if (!query.trim()) return;
@@ -36,28 +42,22 @@ export default function AISearchBar({ onAISearch }) {
     const bathMatch = lower.match(/(\d)\s*bath/);
     if (bathMatch) filters.bathrooms = parseInt(bathMatch[1]);
 
-    // Max price (e.g. "under 2Cr", "below 80 Lakhs", "under 1.5 Cr", "within 50k", "budget of 1.2 Crore")
-    const priceMatch = lower.match(/(?:under|below|within|budget of)\s*(?:₹|rs\.?|)?\s*([\d.]+)\s*(cr|crore|lakh|l|k)?/);
+    // Max price
+    const priceMatch = lower.match(/(?:under|below|within|budget of)\s*(?:₹|rs\.?)?\s*([\d.]+)\s*(cr|crore|lakh|l|k)?/);
     if (priceMatch) {
       let val = parseFloat(priceMatch[1]);
       const unit = priceMatch[2];
-      if (unit === 'cr' || unit === 'crore') {
-        val *= 10000000;
-      } else if (unit === 'lakh' || unit === 'l') {
-        val *= 100000;
-      } else if (unit === 'k') {
-        val *= 1000;
-      } else if (val < 100) {
-        // If they write "under 2" without unit, assume they mean Crores
-        val *= 10000000;
-      }
+      if (unit === 'cr' || unit === 'crore') val *= 10000000;
+      else if (unit === 'lakh' || unit === 'l') val *= 100000;
+      else if (unit === 'k') val *= 1000;
+      else if (val < 100) val *= 10000000;
       filters.maxPrice = val;
     }
 
     // City/Location
     const locations = [
-      "kukatpally", "gachibowli", "madhapur", "kondapur", 
-      "hitec city", "manikonda", "jubilee hills", "banjara hills", 
+      "kukatpally", "gachibowli", "madhapur", "kondapur",
+      "hitec city", "manikonda", "jubilee hills", "banjara hills",
       "tellapur", "narsingi", "miyapur", "uppal", "lb nagar"
     ];
     const locFound = locations.find((l) => lower.includes(l));
@@ -74,17 +74,35 @@ export default function AISearchBar({ onAISearch }) {
   };
 
   return (
-    <div className="ai-search-wrapper">
-      <div className="ai-search-label">
+    <motion.div
+      className="ai-search-wrapper"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: EASE }}
+    >
+      {/* Corner ambient glow */}
+      <div className="ai-corner-glow" aria-hidden="true" />
+
+      <motion.div
+        className="ai-search-label"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
+      >
         <span className="ai-badge">✦ AI</span>
         <span>Describe your ideal property in plain English</span>
-      </div>
+      </motion.div>
 
-      <div className="ai-search-bar">
+      <motion.div
+        className="ai-search-bar"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: EASE, delay: 0.2 }}
+      >
         <input
           type="text"
           className="ai-search-input"
-          placeholder='e.g. "3BHK near good schools in Hyderabad under 2Cr"'
+          placeholder={query ? undefined : (placeholderText || '"3BHK near good schools in Hyderabad under 2Cr"')}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
@@ -97,30 +115,41 @@ export default function AISearchBar({ onAISearch }) {
           disabled={isLoading || !query.trim()}
         >
           {isLoading ? (
-            <span className="ai-spinner">⟳</span>
+            <div className="ai-search-spinner" />
           ) : (
             "Search"
           )}
         </button>
-      </div>
+      </motion.div>
 
-      {showSuggestions && (
-        <div className="ai-suggestions">
-          <p className="ai-suggestions-label">Try asking:</p>
-          {SAMPLE_SUGGESTIONS.map((s, i) => (
-            <div
-              key={i}
-              className="ai-suggestion-item"
-              onMouseDown={() => {
-                setQuery(s);
-                setShowSuggestions(false);
-              }}
-            >
-              {s}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+      <AnimatePresence>
+        {showSuggestions && (
+          <motion.div
+            className="ai-suggestions"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
+            <p className="ai-suggestions-label">Try asking:</p>
+            {SAMPLE_SUGGESTIONS.map((s, i) => (
+              <motion.div
+                key={i}
+                className="ai-suggestion-item"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.05, duration: 0.2 }}
+                onMouseDown={() => {
+                  setQuery(s);
+                  setShowSuggestions(false);
+                }}
+              >
+                {s}
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }

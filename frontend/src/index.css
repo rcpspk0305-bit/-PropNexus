@@ -1,41 +1,95 @@
+/* ============================================================
+   PropNexus — Dark Luxury Design System
+   Inspired by Christie's, Sotheby's, and Vercel
+   ============================================================ */
+
 :root {
-  font-family: 'Plus Jakarta Sans', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Surfaces — layered obsidian */
+  --bg:            #0C0C0B;
+  --surface-1:     #111110;
+  --surface-2:     #161614;
+  --surface-3:     #1C1C1A;
+  --surface-4:     #242422;
+  --border:        rgba(255,255,255,0.07);
+  --border-strong: rgba(255,255,255,0.12);
+
+  /* Ivory text hierarchy */
+  --text-primary:  #F0EDE6;
+  --text-muted:    #9E9B94;
+  --text-faint:    #5A5854;
+  --text-inverse:  #0C0C0B;
+
+  /* Gold — the ONE accent */
+  --gold:          #C9A84C;
+  --gold-light:    #E2C47A;
+  --gold-dim:      rgba(201,168,76,0.15);
+  --gold-glow:     rgba(201,168,76,0.25);
+
+  /* Shadows — deep elevation */
+  --shadow-card:   0 0 0 1px rgba(255,255,255,0.06),
+                   0 4px 24px rgba(0,0,0,0.5);
+  --shadow-hover:  0 0 0 1px rgba(201,168,76,0.2),
+                   0 8px 40px rgba(0,0,0,0.6);
+
+  /* Fonts */
+  --font-display:  'Cormorant Garamond', Georgia, serif;
+  --font-body:     'Satoshi', Inter, system-ui, sans-serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* ============================================================
+   Base
+   ============================================================ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f9fafb;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* AI Search Bar */
+/* ============================================================
+   AI Search Bar
+   ============================================================ */
 .ai-search-wrapper {
   position: relative;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background: linear-gradient(135deg, var(--surface-2), var(--surface-1));
+  border: 1px solid var(--border-strong);
   border-radius: 16px;
-  padding: 20px 24px;
+  padding: 28px 32px;
   margin-bottom: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255,255,255,0.05);
+  overflow: hidden;
 }
 
 .ai-search-label {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #a8d8ea;
+  color: var(--text-muted);
   font-size: 13px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-weight: 500;
+  position: relative;
+  z-index: 2;
 }
 
 .ai-badge {
-  background: #00b4d8;
-  color: #fff;
-  border-radius: 6px;
-  padding: 2px 8px;
+  background: var(--gold-dim);
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 99px;
+  padding: 3px 10px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -44,85 +98,188 @@ body {
 .ai-search-bar {
   display: flex;
   gap: 10px;
+  position: relative;
+  z-index: 2;
 }
 
 .ai-search-input {
   flex: 1;
-  padding: 12px 16px;
+  padding: 13px 18px;
   border-radius: 10px;
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-3);
+  color: var(--text-primary);
   font-size: 15px;
+  font-family: var(--font-body);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
-.ai-search-input::placeholder { color: rgba(255,255,255,0.4); }
-.ai-search-input:focus { border-color: #00b4d8; }
+.ai-search-input::placeholder {
+  color: var(--text-faint);
+}
+.ai-search-input:focus {
+  border-color: rgba(201,168,76,0.4);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+}
 
 .ai-search-btn {
-  padding: 12px 24px;
-  background: #00b4d8;
-  color: #fff;
+  padding: 13px 28px;
+  background: var(--gold);
+  color: var(--text-inverse);
   border: none;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 14px;
+  font-family: var(--font-body);
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 100px;
+  letter-spacing: 0.02em;
 }
-.ai-search-btn:hover:not(:disabled) { background: #0096c7; transform: scale(1.02); }
-.ai-search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.ai-search-btn:hover:not(:disabled) {
+  background: var(--gold-light);
+  box-shadow: 0 0 24px var(--gold-glow);
+  transform: scale(1.02);
+}
+.ai-search-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
-.ai-spinner { display: inline-block; animation: spin 0.7s linear infinite; }
+/* Loading spinner */
+.ai-search-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(0,0,0,0.2);
+  border-top-color: var(--text-inverse);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Suggestions dropdown */
 .ai-suggestions {
   position: absolute;
   top: calc(100% + 6px);
   left: 0; right: 0;
-  background: #1a2a3a;
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
   border-radius: 12px;
   padding: 10px 0;
   z-index: 100;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
 }
 .ai-suggestions-label {
   font-size: 11px;
-  color: rgba(255,255,255,0.4);
+  color: var(--text-faint);
   padding: 4px 16px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 .ai-suggestion-item {
   padding: 10px 16px;
-  color: #cce;
+  color: var(--text-muted);
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.15s;
 }
-.ai-suggestion-item:hover { background: rgba(0, 180, 216, 0.15); }
-
-/* Scrollbar Utilities */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.ai-suggestion-item:hover {
+  background: var(--gold-dim);
+  color: var(--gold-light);
 }
 
-.scrollbar-thin::-webkit-scrollbar {
-  width: 4px;
+/* Corner ambient glow */
+.ai-corner-glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  z-index: 0;
 }
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: transparent;
+
+/* ============================================================
+   Scrollbar Utilities
+   ============================================================ */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+.scrollbar-thin::-webkit-scrollbar { width: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: var(--surface-4); border-radius: 10px; }
+.scrollbar-thin::-webkit-scrollbar-thumb:hover { background: var(--text-faint); }
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+
+/* Shimmer skeleton loader */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
 }
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #e2e8f0;
-  border-radius: 10px;
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--surface-3) 25%, var(--surface-4) 50%, var(--surface-3) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: 4px;
 }
-.scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: #cbd5e1;
+
+/* Shimmer hover sweep on buttons */
+@keyframes shimmer-sweep {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Ping ring (badges, chat button) */
+@keyframes ping {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* ============================================================
+   Scroll-to-top button
+   ============================================================ */
+.scroll-to-top {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  z-index: 90;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--text-inverse);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s;
+}
+.scroll-to-top:hover {
+  box-shadow: 0 0 24px var(--gold-glow), var(--shadow-card);
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
