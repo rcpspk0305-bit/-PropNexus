@@ -25,6 +25,58 @@ const modalVariants = {
   }
 };
 
+const getPropertyImage = (property) => {
+  if (!property) return "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&auto=format&fit=crop&q=80";
+  
+  const type = (property.property_type || property.type || "house").toLowerCase();
+  const id = property.property_id || property.id || 0;
+  
+  const images = {
+    apartment: [
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&auto=format&fit=crop&q=80"
+    ],
+    villa: [
+      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&fit=crop&q=80"
+    ],
+    house: [
+      "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1602075752385-e6d995221304?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=80"
+    ],
+    plot: [
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1444653300604-1de7df85203a?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&auto=format&fit=crop&q=80"
+    ]
+  };
+
+  let category = "house";
+  if (type.includes("apartment") || type.includes("flat")) {
+    category = "apartment";
+  } else if (type.includes("villa")) {
+    category = "villa";
+  } else if (type.includes("plot") || type.includes("land")) {
+    category = "plot";
+  } else if (type.includes("house")) {
+    category = "house";
+  }
+  
+  const list = images[category];
+  const index = Math.abs(id) % list.length;
+  return list[index];
+};
+
 const PropertyDetailModal = ({ property: p, onClose }) => {
   if (!p) return null;
   const isNewLaunch = p.description?.toLowerCase().includes('new') || p.description?.toLowerCase().includes('launch');
@@ -106,7 +158,7 @@ const PropertyDetailModal = ({ property: p, onClose }) => {
         {/* Hero Image */}
         <div style={{ position: 'relative', height: 280, background: 'var(--surface-3)', overflow: 'hidden' }}>
           <img
-            src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            src={getPropertyImage(p)}
             alt={p.title}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
