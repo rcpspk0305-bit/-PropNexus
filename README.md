@@ -2,6 +2,47 @@
 
 **PropNexus** is a full-stack smart property search system built for efficient real-estate listing retrieval. The core search engine is implemented in C using data structures such as hash tables or tree-based indexing for fast lookup, filtering, sorting, ranking, and spatial querying, while FastAPI powers the backend, React provides the frontend, and AI adds natural-language assistance and result explanations.
 
+## 🔄 System Architecture & Workflow
+
+```mermaid
+graph TD
+    %% Styling definitions
+    classDef frontend fill:#1C1C1A,stroke:#C9A84C,stroke-width:2px,color:#F0EDE6;
+    classDef api fill:#111110,stroke:#5A5854,stroke-width:2px,color:#F0EDE6;
+    classDef bridge fill:#161614,stroke:#C9A84C,stroke-width:1.5px,stroke-dasharray: 5 5,color:#F0EDE6;
+    classDef engine fill:#0C0C0B,stroke:#C9A84C,stroke-width:3px,color:#F0EDE6;
+    classDef storage fill:#242422,stroke:#5A5854,stroke-width:1px,color:#F0EDE6;
+
+    %% Nodes
+    A["React Luxury Obsidian Frontend"]:::frontend
+    B["FastAPI Web REST Server (:8000)"]:::api
+    C["NLP Query Parser (ai_utils.py)"]:::api
+    D["C-Python FFI Bridge (bridge.py)"]:::bridge
+    E["High-Performance C-Engine (libds_engine_avl.dll)"]:::engine
+    F[("Property Dataset (synthetic_properties.csv)")]:::storage
+
+    %% C-Engine internal flow
+    E1["Hash Table Index<br/>O(1) ID Lookup"]:::engine
+    E2["AVL Tree Index<br/>O(log N) Price Search"]:::engine
+    E3["Binary Max-Heap<br/>O(N log K) Spatial Proximity"]:::engine
+    E4["Stable Merge Sort<br/>O(N log N) Property Ranking"]:::engine
+
+    %% Connections
+    A -->|User inputs filters / Chat queries| B
+    B -->|Checks message context| C
+    C -->|Extracts intent parameters| B
+    B -->|Marshals ctypes structures| D
+    D -->|FFI binary invocation| E
+    E -->|Loads & syncs data| F
+    E --> E1
+    E --> E2
+    E --> E3
+    E --> E4
+    E1 & E2 & E3 & E4 -->|Assembles results| D
+    D -->|Ctypes output to Dict JSON| B
+    B -->|Fast API JSON Response| A
+```
+
 ## 🚀 Key Features
 - **AVL Tree Indexing**: Efficient price-based range search in $O(\log N + K)$.
 - **ID Hash Table**: Instant $O(1)$ property lookups by ID.
