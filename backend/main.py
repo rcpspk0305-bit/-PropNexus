@@ -290,66 +290,114 @@ async def chat_bot(req: ChatRequest):
     Enhanced AI Chatbot: Answers questions and recommends properties.
     """
     if not engine:
-        return {"reply": "I'm having trouble accessing our property database right now. How else can I assist you?"}
+        return {"reply": "I'm having trouble accessing our property database right now. How else can I assist you?", "recommendations": []}
 
-    # 1. Parse query for parameters
-    params = parse_natural_query(req.message)
-    
-    # 2. If it looks like a search query, fetch data from engine
-    recommended_properties = []
-    is_recommendation = False
-    
-    if params:
-        is_recommendation = True
-        # Fetch properties based on parsed filters
-        # Default values for missing filters to avoid empty results
-        min_p = 0
-        max_p = params.get('max_price', 1000000000)
-        min_a = 0
-        beds = params.get('bedrooms', -1)
-        baths = params.get('bathrooms', -1)
-        
-        # Perform search
-        results = engine.search_advanced(min_p, max_p, min_a, beds, baths, 2) # Mode 2 for advanced sort
-        
-        # Filter by location if specified (C-engine might handle this internally but let's be sure)
-        if 'location' in params:
-            loc = params['location'].lower()
-            results = [p for p in results if loc in p['location_name'].lower()]
-        
-        recommended_properties = results[:5]
+    lower_msg = req.message.lower()
 
-    # 3. Construct Prompt
-    if is_recommendation:
+    # 1. Check for property search intent
+    locations = [
+        "kukatpally", "gachibowli", "madhapur", "kondapur", "hitec city", 
+        "manikonda", "jubilee hills", "banjara hills", "tellapur", 
+        "narsingi", "miyapur", "uppal", "lb nagar"
+    ]
+    has_location = any(loc in lower_msg for loc in locations)
+    has_bhk = any(x in lower_msg for x in ["bhk", "bedroom", "bed"])
+    has_price = any(x in lower_msg for x in ["under", "below", "within", "budget", "cr", "lakh", "price", "cost", "inr", "rs"])
+    has_type = any(x in lower_msg for x in ["apartment", "flat", "condo", "house", "villa", "bungalow", "plot"])
+    
+    search_intent = has_location or has_bhk or has_price or has_type
+
+    if search_intent:
+        # Parse query for parameters
+        params = parse_natural_query(req.message)
+        recommended_properties = []
+        
+        if params or search_intent:
+            min_p = 0
+            max_p = params.get('max_price', 1000000000)
+            min_a = 0
+            beds = params.get('bedrooms', -1)
+            baths = params.get('bathrooms', -1)
+            
+            # Perform search via C-engine
+            results = engine.search_advanced(min_p, max_p, min_a, beds, baths, 2) # Mode 2 for advanced sort
+            
+            # Filter by location if specified
+            if 'location' in params:
+                loc = params['location'].lower()
+                results = [p for p in results if loc in p['location_name'].lower()]
+            elif has_location:
+                # Find which location matches
+                for loc in locations:
+                    if loc in lower_msg:
+                        results = [p for p in results if loc in p['location_name'].lower()]
+                        break
+            
+            # Filter by property type if specified
+            if 'property_type' in params:
+                ptype = params['property_type'].lower()
+                results = [p for p in results if ptype in p['property_type'].lower()]
+            
+            recommended_properties = results[:5]
+
+        # Construct prompt for the search recommendation
         prompt = get_recommendation_prompt(req.message, recommended_properties)
-    else:
-        prompt = f"""
-        Context: You are PropNexus Assistant, a specialized real estate AI. 
-        User Question: {req.message}
+        ai_response = query_hf(prompt)
         
-        Task: Provide a helpful, professional response. If the user asks about property types or locations, 
-        mention that PropNexus specializes in Hyderabad real estate (Kukatpally, Gachibowli, Madhapur, etc.).
-        If they seem to be looking for a house, ask for their budget or preferred location.
-        """
-    
-    # 4. Get AI Response
-    ai_response = query_hf(prompt)
-    
-    if ai_response and isinstance(ai_response, list) and len(ai_response) > 0:
-        reply = ai_response[0].get("generated_text", "").replace(prompt, "").strip()
-    else:
-        # Intelligent fallback for recommendation
-        if is_recommendation and recommended_properties:
-            prop_names = ", ".join([p['title'] for p in recommended_properties[:3]])
-            reply = f"I've found some great options for you in {params.get('location', 'Hyderabad')}, including {prop_names}. Based on your criteria, these properties offer excellent value. Would you like to see more details for any of these?"
+        if ai_response and isinstance(ai_response, list) and len(ai_response) > 0:
+            reply = ai_response[0].get("generated_text", "").replace(prompt, "").strip()
         else:
-            # RAG Fallback integration
+            if recommended_properties:
+                prop_names = ", ".join([p['title'] for p in recommended_properties[:3]])
+                reply = f"I've searched our database and found some excellent matching properties for you, including {prop_names}. Based on your criteria, these options offer great value."
+            else:
+                reply = "I've searched our database, but didn't find any properties matching those exact filters. Try broadening your budget or searching in a different area."
+
+        return {
+            "reply": reply,
+            "recommendations": recommended_properties
+        }
+
+    else:
+        # No search intent detected -> Fall back to generic LLM response
+        prompt = f"""
+        You are a premium real estate assistant for PropNexus.
+        Analyze the user's question: "{req.message}"
+        
+        Respond ONLY with a valid JSON object matching this schema:
+        {{
+          "intent": "general",
+          "reply": "Your detailed answer to the user's question here. Mention that PropNexus specializes in Hyderabad real estate (Kukatpally, Gachibowli, Madhapur, etc.) if relevant."
+        }}
+        
+        Do not include any explanation, code blocks, or markdown outside the JSON. Response:
+        """
+        
+        ai_response = query_hf(prompt)
+        reply = ""
+        
+        if ai_response and isinstance(ai_response, list) and len(ai_response) > 0:
+            raw_text = ai_response[0].get("generated_text", "").replace(prompt, "").strip()
+            
+            # Strip potential JSON code fence formatting if the LLM returned it
+            if "```json" in raw_text:
+                raw_text = raw_text.split("```json")[1].split("```")[0].strip()
+            elif "```" in raw_text:
+                raw_text = raw_text.split("```")[1].split("```")[0].strip()
+                
+            try:
+                data = json.loads(raw_text)
+                reply = data.get("reply", "")
+            except:
+                reply = raw_text
+                
+        if not reply:
             reply = get_rag_fallback_response(req.message)
-    
-    return {
-        "reply": reply,
-        "recommendations": recommended_properties
-    }
+            
+        return {
+            "reply": reply,
+            "recommendations": []
+        }
 
 if __name__ == "__main__":
     import uvicorn

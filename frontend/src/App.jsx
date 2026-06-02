@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-
 import AISearchBar from "./components/AISearchBar";
 import Chatbot from "./components/Chatbot";
 import { useCountUp } from "./hooks/useCountUp";
+import PropertyDetailModal from "./components/PropertyDetailModal";
 
 const API_BASE = 'http://localhost:8000/api';
 const EASE = [0.16, 1, 0.3, 1];
@@ -12,6 +13,7 @@ const App = () => {
   const [allProperties, setAllProperties] = useState([]);
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState(null);
   const [filters, setFilters] = useState({
     min_price: 0,
     max_price: 100000000,
@@ -45,11 +47,15 @@ const App = () => {
         bedrooms: Number(filters.bedrooms),
         bathrooms: Number(filters.bathrooms),
         min_area: Number(filters.min_area) || 0,
-        sort_mode: Number(filters.sort_mode),
+        sort_mode: Number(filters.sort_mode) === 4 ? 0 : Number(filters.sort_mode),
         limit: Number(filters.limit)
       };
       const res = await axios.post(`${API_BASE}/search`, cleanFilters);
       let fetchedProps = Array.isArray(res.data) ? res.data : (res.data.properties || []);
+
+      if (Number(filters.sort_mode) === 4) {
+        fetchedProps.sort((a, b) => b.price - a.price);
+      }
 
       if (filters.location) {
         const loc = filters.location.toLowerCase();
@@ -228,6 +234,7 @@ const App = () => {
                 onChange={(e) => setFilters({ ...filters, sort_mode: parseInt(e.target.value) })}
               >
                 <option value="0">Price (Lowest First)</option>
+                <option value="4">Price (Highest First)</option>
                 <option value="1">Area (Largest First)</option>
                 <option value="2">Advanced (BHK + Loc + Status)</option>
                 <option value="3">Market Status (New/Sale/Resale)</option>
@@ -340,14 +347,29 @@ const App = () => {
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 20 }}>
               {properties.map((p, index) => (
-                <PropertyCard key={p.property_id} property={p} index={index} />
+                <PropertyCard 
+                  key={p.property_id} 
+                  property={p} 
+                  index={index} 
+                  onClick={() => setSelectedProperty(p)}
+                />
               ))}
             </div>
           )}
         </section>
       </main>
 
-      <Chatbot />
+      <Chatbot onViewProperty={(p) => setSelectedProperty(p)} />
+
+      {/* Property Details Modal */}
+      <AnimatePresence>
+        {selectedProperty && (
+          <PropertyDetailModal
+            property={selectedProperty}
+            onClose={() => setSelectedProperty(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Scroll-to-top */}
       <AnimatePresence>
@@ -429,11 +451,12 @@ const CardSkeleton = () => (
 /* ═══════════════════════════════════════
    PropertyCard — dark luxury card with hover + badges
    ═══════════════════════════════════════ */
-const PropertyCard = ({ property: p, index }) => {
+const PropertyCard = ({ property: p, index, onClick }) => {
   const isNewLaunch = p.description?.toLowerCase().includes('new') || p.description?.toLowerCase().includes('launch');
 
   return (
     <motion.div
+      onClick={onClick}
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: EASE, delay: index * 0.06 }}

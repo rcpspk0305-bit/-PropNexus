@@ -17,7 +17,7 @@ const chatWindow = {
   },
 };
 
-const Chatbot = () => {
+const Chatbot = ({ onViewProperty }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { role: 'assistant', content: 'Hi! I am PropNexus AI. How can I help you find a property today?' }
@@ -210,7 +210,15 @@ const Chatbot = () => {
                             <p style={{ fontSize: '0.62rem', color: 'var(--text-faint)', margin: '0 0 6px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.location_name}</p>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                               <span style={{ fontSize: '0.62rem', fontWeight: 600, color: 'var(--text-muted)' }}>{p.bedrooms} BHK • {p.area} sqft</span>
-                              <button style={{ fontSize: '0.62rem', fontWeight: 700, color: 'var(--gold)', background: 'none', border: 'none', cursor: 'pointer' }}>View</button>
+                              <button 
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  if (onViewProperty) onViewProperty(p);
+                                }}
+                                style={{ fontSize: '0.62rem', fontWeight: 700, color: 'var(--gold)', background: 'none', border: 'none', cursor: 'pointer' }}
+                              >
+                                View
+                              </button>
                             </div>
                           </div>
                         </div>
