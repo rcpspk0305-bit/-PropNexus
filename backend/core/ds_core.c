@@ -4,18 +4,18 @@
 #include <stdio.h>
 #include <math.h>
 
-/* Internal K-D Tree node */
-typedef struct KDNode {
+/* Internal AVL Tree Node (Indexed by Price) */
+typedef struct AVLNode {
     Property* prop;
-    struct KDNode *left, *right;
-    int8_t axis;
-} KDNode;
+    struct AVLNode *left, *right;
+    int32_t height;
+} AVLNode;
 
 /* Engine implementation */
 struct PropertyEngine {
     Property* data;
     int32_t count;
-    KDNode* root;
+    AVLNode* root;
 };
 
 /* Result Buffer (Vector Pattern) for O(1) amortized growth */
@@ -73,78 +73,101 @@ static const char* parse_field(const char* line, char* out, int max_len) {
     return line;
 }
 
-/* K-D Tree Construction */
-static int compare_lat(const void* a, const void* b) {
-    double diff = (*(Property**)a)->latitude - (*(Property**)b)->latitude;
-    return (diff > 0) - (diff < 0);
+/* --- AVL Tree Implementation Functions --- */
+
+static int32_t get_height(AVLNode* n) {
+    return n ? n->height : 0;
 }
 
-static int compare_lon(const void* a, const void* b) {
-    double diff = (*(Property**)a)->longitude - (*(Property**)b)->longitude;
-    return (diff > 0) - (diff < 0);
+static int32_t max(int32_t a, int32_t b) {
+    return (a > b) ? a : b;
 }
 
-static KDNode* build_recursive(Property** props, int32_t n, int8_t depth) {
-    if (n <= 0) return NULL;
-    int8_t axis = depth % 2;
-    qsort(props, n, sizeof(Property*), axis == 0 ? compare_lat : compare_lon);
-    int32_t mid = n / 2;
-    KDNode* node = (KDNode*)malloc(sizeof(KDNode));
+static AVLNode* create_avl_node(Property* p) {
+    AVLNode* node = (AVLNode*)malloc(sizeof(AVLNode));
     if (!node) return NULL;
-    node->prop = props[mid];
-    node->axis = axis;
-    node->left = build_recursive(props, mid, depth + 1);
-    node->right = build_recursive(props + mid + 1, n - mid - 1, depth + 1);
+    node->prop = p;
+    node->left = node->right = NULL;
+    node->height = 1;
     return node;
 }
 
-static void free_kd_nodes(KDNode* node) {
+static AVLNode* right_rotate(AVLNode* y) {
+    AVLNode* x = y->left;
+    AVLNode* T2 = x->right;
+    x->right = y;
+    y->left = T2;
+    y->height = max(get_height(y->left), get_height(y->right)) + 1;
+    x->height = max(get_height(x->left), get_height(x->right)) + 1;
+    return x;
+}
+
+static AVLNode* left_rotate(AVLNode* x) {
+    AVLNode* y = x->right;
+    AVLNode* T2 = y->left;
+    y->left = x;
+    x->right = T2;
+    x->height = max(get_height(x->left), get_height(x->right)) + 1;
+    y->height = max(get_height(y->left), get_height(y->right)) + 1;
+    return y;
+}
+
+static int32_t get_balance(AVLNode* n) {
+    return n ? get_height(n->left) - get_height(n->right) : 0;
+}
+
+static AVLNode* insert_avl(AVLNode* node, Property* p) {
+    if (!node) return create_avl_node(p);
+
+    if (p->price < node->prop->price)
+        node->left = insert_avl(node->left, p);
+    else
+        node->right = insert_avl(node->right, p);
+
+    node->height = 1 + max(get_height(node->left), get_height(node->right));
+    int32_t balance = get_balance(node);
+
+    // Left Left Case
+    if (balance > 1 && p->price < node->left->prop->price)
+        return right_rotate(node);
+
+    // Right Right Case
+    if (balance < -1 && p->price > node->right->prop->price)
+        return left_rotate(node);
+
+    // Left Right Case
+    if (balance > 1 && p->price > node->left->prop->price) {
+        node->left = left_rotate(node->left);
+        return right_rotate(node);
+    }
+
+    // Right Left Case
+    if (balance < -1 && p->price < node->right->prop->price) {
+        node->right = right_rotate(node->right);
+        return left_rotate(node);
+    }
+
+    return node;
+}
+
+static void avl_range_search(AVLNode* node, double min_p, double max_p, ResultBuffer* rb) {
     if (!node) return;
-    free_kd_nodes(node->left);
-    free_kd_nodes(node->right);
+    if (node->prop->price > min_p)
+        avl_range_search(node->left, min_p, max_p, rb);
+    if (node->prop->price >= min_p && node->prop->price <= max_p)
+        rb_add(rb, node->prop);
+    if (node->prop->price < max_p)
+        avl_range_search(node->right, min_p, max_p, rb);
+}
+
+static void free_avl_nodes(AVLNode* node) {
+    if (!node) return;
+    free_avl_nodes(node->left);
+    free_avl_nodes(node->right);
     free(node);
 }
 
-/* Range Search logic */
-static void range_search_recursive(KDNode* node, double lat_min, double lon_min, 
-                                   double lat_max, double lon_max, ResultBuffer* rb) {
-    if (!node) return;
-    Property* p = node->prop;
-    if (p->latitude >= lat_min && p->latitude <= lat_max &&
-        p->longitude >= lon_min && p->longitude <= lon_max) {
-        rb_add(rb, p);
-    }
-    double val = (node->axis == 0) ? p->latitude : p->longitude;
-    double min_b = (node->axis == 0) ? lat_min : lon_min;
-    double max_b = (node->axis == 0) ? lat_max : lon_max;
-    if (min_b <= val) range_search_recursive(node->left, lat_min, lon_min, lat_max, lon_max, rb);
-    if (max_b >= val) range_search_recursive(node->right, lat_min, lon_min, lat_max, lon_max, rb);
-}
-
-/* NN Search logic */
-typedef struct {
-    Property* prop;
-    double dist_sq;
-} BestNode;
-
-static void nn_recursive(KDNode* root, double lat, double lon, int32_t n, BestNode* best, int32_t* found) {
-    if (!root) return;
-    double d2 = pow(root->prop->latitude - lat, 2) + pow(root->prop->longitude - lon, 2);
-    int32_t i;
-    for (i = 0; i < *found; i++) { if (d2 < best[i].dist_sq) break; }
-    if (i < n) {
-        if (*found < n) (*found)++;
-        for (int32_t j = *found - 1; j > i; j--) best[j] = best[j-1];
-        best[i].prop = root->prop; best[i].dist_sq = d2;
-    }
-    double diff = (root->axis == 0) ? (lat - root->prop->latitude) : (lon - root->prop->longitude);
-    KDNode *near = (diff < 0) ? root->left : root->right;
-    KDNode *far = (diff < 0) ? root->right : root->left;
-    nn_recursive(near, lat, lon, n, best, found);
-    if (*found < n || (diff * diff) < best[*found - 1].dist_sq) nn_recursive(far, lat, lon, n, best, found);
-}
-
-/* API EXPORTS */
+/* --- API EXPORTS --- */
 
 ds_status_t ds_init_engine(const char* csv_path, PropertyEngine** engine_out) {
     if (!csv_path || !engine_out) return DS_ERR_NULL_POINTER;
@@ -157,7 +180,6 @@ ds_status_t ds_init_engine(const char* csv_path, PropertyEngine** engine_out) {
     char line[4096];
     fgets(line, sizeof(line), f); // Header
 
-    Property** temp_ptrs = NULL;
     char field[1024];
 
     while (fgets(line, sizeof(line), f)) {
@@ -181,12 +203,10 @@ ds_status_t ds_init_engine(const char* csv_path, PropertyEngine** engine_out) {
                 case 10: strncpy(p->description, field, 1023); break;
             }
         }
-        temp_ptrs = (Property**)realloc(temp_ptrs, (engine->count + 1) * sizeof(Property*));
-        temp_ptrs[engine->count++] = p;
+        engine->root = insert_avl(engine->root, p);
+        engine->count++;
     }
     fclose(f);
-    engine->root = build_recursive(temp_ptrs, engine->count, 0);
-    free(temp_ptrs);
     *engine_out = engine;
     return DS_SUCCESS;
 }
@@ -197,7 +217,13 @@ ds_status_t ds_range_search(PropertyEngine* engine, double lat_min, double lon_m
     if (!engine || !results || !count) return DS_ERR_NULL_POINTER;
     ResultBuffer rb;
     if (rb_init(&rb) != DS_SUCCESS) return DS_ERR_MALLOC_FAIL;
-    range_search_recursive(engine->root, lat_min, lon_min, lat_max, lon_max, &rb);
+    for (int i = 0; i < engine->count; i++) {
+        Property* p = &engine->data[i];
+        if (p->latitude >= lat_min && p->latitude <= lat_max &&
+            p->longitude >= lon_min && p->longitude <= lon_max) {
+            rb_add(&rb, p);
+        }
+    }
     *results = rb.items;
     *count = rb.size;
     return DS_SUCCESS;
@@ -206,13 +232,34 @@ ds_status_t ds_range_search(PropertyEngine* engine, double lat_min, double lon_m
 ds_status_t ds_nearest_n(PropertyEngine* engine, double lat, double lon, int32_t n, 
                          Property*** results, int32_t* count) {
     if (!engine || !results || !count) return DS_ERR_NULL_POINTER;
-    BestNode* best = (BestNode*)malloc(n * sizeof(BestNode));
-    int32_t found = 0;
-    nn_recursive(engine->root, lat, lon, n, best, &found);
-    *results = (Property**)malloc(found * sizeof(Property*));
-    *count = found;
-    for (int32_t i = 0; i < found; i++) (*results)[i] = best[i].prop;
-    free(best);
+    /* Simple O(N) fallback for spatial proximity */
+    typedef struct {
+        Property* prop;
+        double dist_sq;
+    } DistNode;
+    
+    DistNode* list = (DistNode*)malloc(engine->count * sizeof(DistNode));
+    for (int32_t i = 0; i < engine->count; i++) {
+        list[i].prop = &engine->data[i];
+        list[i].dist_sq = pow(engine->data[i].latitude - lat, 2) + pow(engine->data[i].longitude - lon, 2);
+    }
+    
+    // Sort array by proximity
+    for (int32_t i = 0; i < engine->count - 1; i++) {
+        for (int32_t j = i + 1; j < engine->count; j++) {
+            if (list[i].dist_sq > list[j].dist_sq) {
+                DistNode temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
+            }
+        }
+    }
+    
+    int32_t res_count = (n < engine->count) ? n : engine->count;
+    *results = (Property**)malloc(res_count * sizeof(Property*));
+    *count = res_count;
+    for (int32_t i = 0; i < res_count; i++) (*results)[i] = list[i].prop;
+    free(list);
     return DS_SUCCESS;
 }
 
@@ -220,11 +267,10 @@ ds_status_t ds_filter_by_price(PropertyEngine* engine, double min_p, double max_
                                Property*** results, int32_t* count) {
     if (!engine || !results || !count) return DS_ERR_NULL_POINTER;
     ResultBuffer rb;
-    rb_init(&rb);
-    for (int32_t i = 0; i < engine->count; i++) {
-        if (engine->data[i].price >= min_p && engine->data[i].price <= max_p) rb_add(&rb, &engine->data[i]);
-    }
-    *results = rb.items; *count = rb.size;
+    if (rb_init(&rb) != DS_SUCCESS) return DS_ERR_MALLOC_FAIL;
+    avl_range_search(engine->root, min_p, max_p, &rb);
+    *results = rb.items;
+    *count = rb.size;
     return DS_SUCCESS;
 }
 
@@ -243,7 +289,7 @@ ds_status_t ds_free_results(Property** results) {
 
 void ds_destroy_engine(PropertyEngine* engine) {
     if (!engine) return;
-    free_kd_nodes(engine->root);
+    free_avl_nodes(engine->root);
     free(engine->data);
     free(engine);
 }

@@ -70,14 +70,12 @@ npm run dev
 | **Result Sorting** | Merge Sort | $O(N \log N)$ |
 | **AI Matching** | Hybrid (NLP + RAG) | $O(\text{Embedding/Keyword Search})$ |
 
-## 🌟 Recent Updates (v2.1)
-- **Advanced Chat Recommendations**: The assistant now suggests specific property cards within the chat interface.
-- **RAG Knowledge Base**: Implemented a local retrieval-augmented generation fallback to answer general questions without relying on external LLM APIs.
-- **NLP Query Parser**: Ported search logic to the backend for unified query understanding across the search bar and chatbot.
-- **UI Polish**: Integrated custom scrollbars, micro-animations, and a unified color palette for a premium aesthetic.
+## 🌟 Recent Updates (v3.0)
+- **Luxury Obsidian & Gold Redesign**: Overhauled the entire visual theme inspired by Christie's Real Estate, using layers of deep obsidian surfaces, elegant typography, and a unified gold-accent styling.
+- **Framer Motion v11 Transitions**: Added smooth staggers on property grid viewport entry, floating logo micro-animations, slow-drift gradient orbs behind the search card, and responsive active filter badge pops.
+- **High-Fidelity Property Detail Modal**: Implemented interactive property cards opening into a rich overlay detail view equipped with full unsplash imagery, C-Engine stats, local location tagging, and elegant tactile CTAs.
+- **Chatbot Intent Mapping & View actions**: The AI chatbot now detects query search intent to instantly extract matching property cards from the C-engine. Recommend cards support a "View" button that dismisses the chatbot and displays the property detail modal.
+- **Unified Query Parser & Descending Price Sort**: Integrated local sub-millisecond price-descending ranking alongside standard AVL range queries.
 
 ---
 *Created as a Data Structures Semester Project.*
-
-# From the backend/core directory
-..\scripts\mingw64\mingw64\bin\gcc.exe -O3 -march=native -Wall -Wextra -std=c11 -fPIC -shared -o libds_engine_avl.dll ds_hash_sort.c ds_spatial_heap.c
